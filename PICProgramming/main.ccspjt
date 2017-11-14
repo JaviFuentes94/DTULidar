@@ -1,0 +1,132 @@
+[PROJECT]
+Target=main.hex
+Processor_Text=PIC16F887
+CCSVerions=5.026
+Compiler=PCM
+CCSVersion=5.026
+[Target Data]
+FileList=main.c
+[Directories]
+Include=
+[D:\University\Master\Digital Instrumentation\Week8\main]
+Type=4
+[mru-list]
+1=main.c
+
+[Opened Files]
+1=main.c
+t1=1
+2=main.h
+t2=1
+3=main.h
+t3=1
+Count=2
+4=TerminalUtils.c
+t4=1
+
+[ProjectLog]
+Days=4
+D1=31-10-2017
+D1_L=33
+D1_L1=[49349]Project Closed.
+D1_L2=[49349]Project Opened.
+D1_L3=[49407]Started Editing.
+D1_L4=[49727]Stopped Editing.
+D1_L5=[49999]Started Editing.
+D1_L6=[51070]Stopped Editing.
+D1_L7=[53565]Started Editing.
+D1_L8=[56068]Stopped Editing.
+TotalEdit=199
+TotalDebug=0
+D1_E=116
+D1_D=0
+D1_L9=[56068]Project Closed.
+D1_L10=[56261]Project Opened.
+D1_L11=[56872]Started Editing.
+D1_L12=[57397]Stopped Editing.
+D1_L13=[57532]Started Editing.
+D1_L14=[57843]Stopped Editing.
+D1_L15=[58724]Started Editing.
+D1_L16=[59040]Stopped Editing.
+D1_L17=[59142]Started Editing.
+D1_L18=[59449]Stopped Editing.
+D1_L19=[59530]Started Editing.
+D1_L20=[60326]Stopped Editing.
+D1_L21=[63391]Started Editing.
+D1_L22=[64188]Stopped Editing.
+D1_L23=[64235]Started Editing.
+D1_L24=[65848]Stopped Editing.
+D1_L25=[65848]Project Closed.
+D1_L26=[65916]Project Opened.
+D1_L27=[66048]Started Editing.
+D1_L28=[66553]Stopped Editing.
+D1_L29=[66641]Started Editing.
+D1_L30=[67192]Stopped Editing.
+D1_L31=[67192]Project Closed.
+D1_L32=[67204]Project Opened.
+D1_L33=[67238]Project Closed.
+D2=07-11-2017
+D2_L=34
+D2_L1=[47772]Project Opened.
+D2_L2=[50463]Project Closed.
+D2_L3=[50643]Project Opened.
+D2_L4=[50649]Started Editing.
+D2_L5=[51040]Stopped Editing.
+D2_L6=[51234]Started Editing.
+D2_L7=[51868]Stopped Editing.
+D2_L8=[51881]Started Editing.
+D2_L9=[52506]Stopped Editing.
+D2_L10=[52742]Started Editing.
+D2_L11=[54044]Stopped Editing.
+D2_L12=[55528]Started Editing.
+D2_L13=[56195]Stopped Editing.
+D2_L14=[56940]Started Editing.
+D2_L15=[57660]Stopped Editing.
+D2_L16=[58078]Started Editing.
+D2_L17=[58496]Stopped Editing.
+D2_L18=[58610]Started Editing.
+D2_L19=[59302]Stopped Editing.
+D2_L20=[60761]Started Editing.
+D2_L21=[61353]Stopped Editing.
+D2_L22=[62314]Started Editing.
+D2_L23=[62793]Stopped Editing.
+D2_L24=[62881]Started Editing.
+D2_L25=[63779]Stopped Editing.
+D2_L26=[64694]Started Editing.
+D2_L27=[64995]Stopped Editing.
+D2_L28=[65249]Started Editing.
+D2_L29=[65580]Stopped Editing.
+D2_E=81
+D2_D=0
+D2_L30=[65580]Project Closed.
+D2_L31=[65617]Project Opened.
+D2_L32=[65721]Started Editing.
+D2_L33=[66354]Stopped Editing.
+D2_L34=[69452]Project Closed.
+D3=11-11-2017
+D3_L=4
+D3_L1=[50917]Project Opened.
+D3_L2=[50934]Started Editing.
+D3_L3=[51234]Stopped Editing.
+D3_E=0
+D3_D=0
+D3_L4=[62807]Project Closed.
+D4=14-11-2017
+D4_L=5
+D4_L1=[57841]Project Opened.
+D4_L2=[57907]Project Opened.
+D4_L3=[57914]Started Editing.
+D4_L4=[58032]Stopped Editing.
+D4_E=2
+D4_D=0
+D4_L5=[58032]Project Closed.
+[main.c]
+Type=4
+
+[ExtraIncludes]
+Count=0
+1=main=d:\university\master\digital instrumentation\week8\lcd16216.c
+2=main=d:\university\master\digital instrumentation\week8\terminalutils.c
+[Units]
+Count=1
+1=main (main)
