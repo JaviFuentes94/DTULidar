@@ -30,17 +30,21 @@ float readLongRangeSensor()
   unsigned int16 iSensorRead;
   iSensorRead = readInternalAdc(CHANNEL_LONG_RANGE);
   
-  if(iSensorRead >= 1000 || iSensorRead <= 573 ){
-   iSensorRead = 0;
-  }
-  else
+  if(iSensorRead >= 1000)
   {
+   iSensorRead = 0;
+	}
+	else
+  {
+		if(iSensorRead <= 573 )
+		{
+			iSensorRead = 5;
+		}
+		else
+		{
       iSensorRead = 122f / (( 2.5f * ((float) iSensorRead) ) / 1024f - 1.28f);
-      /* Add conversion formulas here */
-      //  return ((275 * iSensorRead) / 1025);
-      //  return ((float) iSensorRead) * 0.268f;
       printf("iSensorRead: %Lu \t in volt: %f \t\t", iSensorRead, (iSensorRead * 2.5f) / 1024f );
-   
+    }
   }
    return iSensorRead;
 }
