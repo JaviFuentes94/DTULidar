@@ -9,27 +9,32 @@
 #include <cstdio>
 
 #include "SerialPort.h"
-
+#include "PacketDecoder.h"
 
 
 using namespace std;
 
-char *portName = "\\\\.\\COM4";
+char *portName = "\\\\.\\COM8";
 
 //String for incoming data
 char incomingData[MAX_DATA_LENGTH];
 char outcommingData[MAX_DATA_LENGTH];
-
+int readAngle;
 void ReadUsb(SerialPort &serialport) {
 	
 	while (serialport.isConnected())
 	{
-		cout << "Write to the device" << endl;
-		//cin >> outcommingData;
-		//bool writeResult = serialport.writeSerialPort(outcommingData, MAX_DATA_LENGTH);
-		int readResult = serialport.readSerialPort(incomingData, MAX_DATA_LENGTH);
-		puts(incomingData);
-		uint8_t incommingBytes = (uint8_t)incomingData;
+		int bytesRead = serialport.readSerialPort(incomingData, MAX_DATA_LENGTH);
+
+		//puts(incomingData);
+		if (bytesRead >= 6) {
+			//sscanf_s(incomingData, "%d", &readAngle);
+			//printf("%d\n", readAngle);
+			PacketDecoder::packet_t packet = PacketDecoder::Decode(incomingData);
+			printf("zAngle: %d \n", packet.zAngle);
+			printf("yAngle: %d \n", packet.yAngle);
+			printf("Distance: %d \n", packet.distance);
+		}
 		Sleep(100);
 	}
 }

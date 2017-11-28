@@ -1,0 +1,69 @@
+004-005 @READ_PROGRAM_MEMORY8.P1
+004-005 @WRITE_PROGRAM_MEMORY8.P2
+015     CCP_1
+015     CCP_1_LOW
+016     CCP_1_HIGH
+01B     CCP_2
+01B     CCP_2_LOW
+01C     CCP_2_HIGH
+020     rs232_errors
+021     @TRIS_C
+022-027 MAIN.packetToSend
+028     MAIN.count
+029-02A sendMeasurements.sendPacket
+029     @delay_ms1.P1
+02B     sendMeasurements.characterToSend
+02C     sendMeasurements.@SCRATCH1
+02D     sendMeasurements.@SCRATCH2
+077     @SCRATCH
+078     @SCRATCH
+078     _RETURN_
+079     @SCRATCH
+07A     @SCRATCH
+107.6   C1OUT
+108.6   C2OUT
+10D-10E @WRITE_PROGRAM_MEMORY8.P1
+10D-10E @READ_PROGRAM_MEMORY8.P2
+
+ROM Allocation:
+000004  init
+00000E  sendMeasurements
+00008C  @delay_ms1
+0000A2  @cinit1
+0000A2  MAIN
+0000C8  @cinit2
+
+Project Directory:
+    D:\University\Master\Digital Instrumentation\DTULidar\In progress\
+
+Project Files:
+    main.c                                                  [28-Nov-17 17:00  CRC=47D1D104]
+    main.h                                                  [31-Oct-17 13:44  CRC=F817D64F]
+    ..\..\..\..\..\Programas\PICC\Devices\16F887.h          [12-Sep-17 12:42  CRC=34D19F2C]
+
+Source signature=A98CE5AB
+
+Units:
+    main (main)
+
+Compiler Settings:
+    Processor:      PIC16F887
+    Pointer Size:   16
+    ADC Range:      0-1023
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+    ICD Provisions: Yes
+    Compile Mode:       CCS5
+
+Output Files:
+    XREF file:   main.xsym
+    Errors:      main.err
+    Ext Symbols: main.esym
+    INHX8:       main.hex
+    Symbols:     main.sym
+    List:        main.lst
+    Debug/COFF:  main.cof
+    Project:     main.ccspjt
+    Call Tree:   main.tre
+    Statistics:  main.STA
