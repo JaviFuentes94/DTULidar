@@ -7,15 +7,15 @@
 #define PWM_DUTY_MIN 0
 #define PWM_DUTY_MAX 800 //change
 
-int16 pwm_count = 0;
-int16 servo_angle = 0;
+long int pwm_count = 0;
+int servo_angle = 0;
 
 
 #int_ccp1
 void ccp1_int(){
 //   output_toggle(PIN_D0);
    
-   if(pwm_count++ == 200){
+   if(pwm_count++ == 800){
       pwm_count = 0;
    }
    
@@ -32,7 +32,7 @@ void main()
    
 
    setup_oscillator(OSC_8MHZ,2);
-   CCP_1 = 50;
+   CCP_1 = 25;
    setup_ccp1(CCP_COMPARE_RESET_TIMER|CCP_COMPARE_INT);
 //   setup_ccp1(CCP_COMPARE_RESET_TIMER); 
 //   setup_ccp1(CCP_COMPARE_INT); 
@@ -43,13 +43,13 @@ void main()
 
    while(TRUE){
       
-      while(servo_angle < 19){
+      while(servo_angle < 200){
          servo_angle++;
-         delay_ms(5);
+         delay_ms(50);
       }
-      while(servo_angle > 9){
+      while(servo_angle > 100){
          servo_angle--;
-         delay_ms(5);
+         delay_ms(50);
       }
    }
 

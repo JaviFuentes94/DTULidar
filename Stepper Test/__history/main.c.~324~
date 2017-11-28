@@ -15,7 +15,7 @@ int16 servo_angle = 0;
 void ccp1_int(){
 //   output_toggle(PIN_D0);
    
-   if(pwm_count++ == 200){
+   if(pwm_count++ == 1600){
       pwm_count = 0;
    }
    
@@ -36,18 +36,18 @@ void main()
    setup_ccp1(CCP_COMPARE_RESET_TIMER|CCP_COMPARE_INT);
 //   setup_ccp1(CCP_COMPARE_RESET_TIMER); 
 //   setup_ccp1(CCP_COMPARE_INT); 
-   setup_timer_1(T1_INTERNAL|T1_DIV_BY_2);
+   setup_timer_1(T1_INTERNAL|T1_DIV_BY_1);
    
    enable_interrupts(INT_CCP1);
    enable_interrupts(GLOBAL);
 
    while(TRUE){
       
-      while(servo_angle < 19){
+      while(servo_angle < 600){
          servo_angle++;
          delay_ms(5);
       }
-      while(servo_angle > 9){
+      while(servo_angle > 200){
          servo_angle--;
          delay_ms(5);
       }
