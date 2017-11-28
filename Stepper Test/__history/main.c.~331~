@@ -39,6 +39,7 @@ void main()
                iCurrentPosition = ((iCurrentPosition + 200)&3);
                printf("\nFull rotation complete CCW\n"); 
              break;
+             
              case 'd':
                  /* Select next position */
                  iCurrentPosition = ((iCurrentPosition+1)&3);

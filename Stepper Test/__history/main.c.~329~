@@ -1,11 +1,31 @@
 
+
+#include <main.h>
+
+
+void main()
+{
+   
+
+   setup_oscillator(OSC_8MHZ,2);
+
+
+
+   while(TRUE)
+   {
+      
+  }  
+}
+
+
+
 #include <main.h>
 
 /*Declarations*/
 #BYTE portc = 7      // Port used to control motor
 BYTE const POSITIONS[4] = { 0b0101, 0b1001, 0b1010, 0b0110 };
 unsigned int8 iCurrentPosition = 0; /* This variable keeps track of the current position */
-unsigned int32 iDelay = 5000; // delay default 5ms
+unsigned int32 iDelay = 5000 // delay default 5ms
 
 void main()
 {
@@ -39,6 +59,7 @@ void main()
                iCurrentPosition = ((iCurrentPosition + 200)&3);
                printf("\nFull rotation complete CCW\n"); 
              break;
+             
              case 'd':
                  /* Select next position */
                  iCurrentPosition = ((iCurrentPosition+1)&3);
