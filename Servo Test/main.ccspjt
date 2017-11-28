@@ -15,7 +15,7 @@ Type=4
 
 [Opened Files]
 1=main.c
-t1=134
+t1=13
 2=main.h
 t2=1
 3=TerminalUtils.c
@@ -205,7 +205,7 @@ D7_L17=[81991]Stopped Editing.
 D7_L18=[82102]Started Editing.
 D7_L19=[82821]Stopped Editing.
 D8=28-11-2017
-D8_L=10
+D8_L=13
 D8_L1=[36412]Started Editing.
 D8_L2=[36770]Stopped Editing.
 D8_L3=[36770]Started Debugging.
@@ -216,6 +216,9 @@ D8_L7=[40744]Started Debugging.
 D8_L8=[41889]Stopped Debugging.
 D8_L9=[43274]Started Debugging.
 D8_L10=[46300]Stopped Debugging.
+D8_L11=[48164]Project Opened.
+D8_L12=[48401]Started Editing.
+D8_L13=[48767]Stopped Editing.
 [main.c]
 Type=4
 

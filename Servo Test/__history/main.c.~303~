@@ -15,11 +15,11 @@ int servo_angle = 0;
 void ccp1_int(){
 //   output_toggle(PIN_D0);
    
-   if(pwm_count++ == 200){
+   if(pwm_count++ == servo_angle){
       pwm_count = 0;
    }
    
-   if(pwm_count <= servo_angle){ //servo_angle
+   if(pwm_count <= 19){ //servo_angle
       output_high(PIN_D0);      
    }else{
       output_low(PIN_D0);

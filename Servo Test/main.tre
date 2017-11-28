@@ -1,41 +1,6 @@
-ÀÄmain
-   ÀÄMAIN  0/71  Ram=4
-      ÃÄ@cinit1  (Inline)  Ram=0
-      ÃÄinit  0/37  Ram=0
-      ÃÄreadLongRangeSensor  0/713  Ram=6
-      ³  ÃÄreadInternalAdc  (Inline)  Ram=1
-      ³  ÃÄ@ITOF  0/29  Ram=2
-      ³  ÃÄ@MULFF  0/117  Ram=13
-      ³  ÃÄ@DIVFF  0/202  Ram=14
-      ³  ÃÄ@ADDFF  (Inline)  Ram=16
-      ³  ÃÄ@DIVFF  0/202  Ram=14
-      ³  ÃÄ@SFTOI  (Inline)  Ram=4
-      ³  ÃÄ@ITOF  0/29  Ram=2
-      ³  ÃÄ@MULFF  0/117  Ram=13
-      ³  ÃÄ@DIVFF  0/202  Ram=14
-      ³  ÃÄ@PSTRINGCN7_620  0/87  Ram=5
-      ³  ³  ÃÄ@PUTCHAR_1_  0/41  Ram=1
-      ³  ³  ÀÄ@PUTCHAR_1_  0/41  Ram=1
-      ³  ÃÄ@PRINTF_LU_620  (Inline)  Ram=9
-      ³  ³  ÀÄ@PUTCHAR_1_  0/41  Ram=1
-      ³  ÃÄ@PSTRINGCN7_620  0/87  Ram=5
-      ³  ³  ÀÄ*
-      ³  ÃÄ@PRINTF_L32D_620FPFPF  0/224  Ram=13
-      ³  ³  ÃÄ@MULFF  0/117  Ram=13
-      ³  ³  ÃÄ@FTOSD  (Inline)  Ram=5
-      ³  ³  ÃÄ@DIV3232  0/79  Ram=13
-      ³  ³  ÃÄ@PUTCHAR_1_  0/41  Ram=1
-      ³  ³  ÃÄ@PUTCHAR_1_  0/41  Ram=1
-      ³  ³  ÃÄ@PUTCHAR_1_  0/41  Ram=1
-      ³  ³  ÃÄ@PUTCHAR_1_  0/41  Ram=1
-      ³  ³  ÀÄ@DIV3232  0/79  Ram=13
-      ³  ÃÄ@PUTCHAR_1_  0/41  Ram=1
-      ³  ÃÄ@PUTCHAR_1_  0/41  Ram=1
-      ³  ÃÄ@PUTCHAR_1_  0/41  Ram=1
-      ³  ÀÄ@ITOF  0/29  Ram=2
-      ÃÄ@PSTRINGCN7_620  0/87  Ram=5
-      ³  ÀÄ*
-      ÃÄ@PRINTF_L32D_620FPFPF  0/224  Ram=13
-      ³  ÀÄ*
-      ÃÄ@PUTCHAR_1_  0/41  Ram=1
-      ÀÄ@delay_ms1  0/22  Ram=1
+ÀÄ5
+   ÃÄMAIN  0/78  Ram=0
+   ³  ÃÄ@cinit1  (Inline)  Ram=0
+   ³  ÃÄ@delay_ms1  0/20  Ram=1
+   ³  ÀÄ@delay_ms1  0/20  Ram=1
+   ÀÄccp1_int  0/22  Ram=1
