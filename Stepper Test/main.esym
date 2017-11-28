@@ -1,7 +1,8 @@
-D G "__PCM__" 0 82 ""5.026""
-D G "__DEVICE__" 0 82 "887"
-D G "__DATE__" 0 82 ""28-nov-17""
-D G "__TIME__" 0 82 ""16:09:49"" "Standard Header file for the PIC16F887 device ////////////////"
+C L "MAIN" 0 4 1 "FUNCTION"
+D G "__PCM__" 0 171 ""5.026""
+D G "__DEVICE__" 0 171 "887"
+D G "__DATE__" 0 171 ""28-nov-17""
+D G "__TIME__" 0 171 ""17:40:31"" "Standard Header file for the PIC16F887 device ////////////////"
 c L "set_tris_a" 2 3 6 "FUNCTION"
 v L "value" 2 39 "int8" `54 
 f B "set_tris_a" 2 39 "void(int8 value)" `53 
@@ -849,27 +850,50 @@ d G "INT_RB4" 2 763 "0x1100B08"
 d G "INT_RB5" 2 764 "0x1200B08"
 d G "INT_RB6" 2 765 "0x1400B08"
 d G "INT_RB7" 2 766 "0x1800B08"
-C L "jump_to_isr" 1 3 3 "FUNCTION"
+C L "jump_to_isr" 1 10 2 "FUNCTION"
 C L "jump_to_isr" 0 4 1 "FUNCTION"
 C L "jump_to_isr" 0 4 1 "FUNCTION"
 V G "POSITIONS" 0 6 "[4]" `627 
 V G "iCurrentPosition" 0 7 "int8" `630 
 C L "jump_to_isr" 0 4 1 "FUNCTION"
 V G "iDelay" 0 8 "int32" `631 
-C L "jump_to_isr" 0 4 1 "FUNCTION"
-F G "main" 0 11 "void()" `632  "Setup the oscillator *"
-C L "main" 0 4 1 "FUNCTION"
-C L "main" 0 4 1 "FUNCTION"
-C L "main" 0 4 1 "FUNCTION"
-V L "i" 0 32 "int8" `644 
-C L "main" 0 4 1 "FUNCTION"
-C L "main" 0 4 1 "FUNCTION"
-C L "main" 0 4 1 "FUNCTION"
-C L "main" 0 4 1 "FUNCTION"
-C L "main" 0 4 1 "FUNCTION"
-C L "main" 0 4 1 "FUNCTION"
-C L "main" 0 4 1 "FUNCTION"
-C L "main" 0 4 1 "FUNCTION"
+D G "CHANNEL_LONG_RANGE" 0 12 "4"
+D G "CHANNEL_SHORT_RANGE" 0 13 "6"
+V L "adcValue" 0 15 "int16" `633 
+F G "rescaleLongRangeSensor" 0 16 "float(int16 adcValue)" `632 
+V L "rescaledValue" 0 17 "float" `634 
+V L "channel" 0 34 "int8" `647 
+F G "readInternalAdc" 0 35 "int16(int8 channel)" `646 
+C L "readInternalAdc" 0 4 1 "FUNCTION"
+V L "done" 0 41 "int1" `648 
+C L "readInternalAdc" 0 4 1 "FUNCTION"
+C L "readInternalAdc" 0 4 1 "FUNCTION"
+C L "readInternalAdc" 0 4 1 "FUNCTION"
+C L "readLongRangeSensor" 0 4 1 "FUNCTION"
+F G "readLongRangeSensor" 0 54 "float()" `649 
+V L "iSensorRead" 0 55 "int16" `650 
+V L "rescaledValue" 0 56 "float" `651 
+F G "readShortRangeSensor" 0 64 "int16()" `665 
+V L "iSensorRead" 0 65 "int16" `666 
+C L "readShortRangeSensor" 0 4 1 "FUNCTION"
+F G "init" 0 72 "void()" `667  "setup_oscillator(OSC_8MHZ,2);"
+C L "init" 0 4 2 "FUNCTION"
+C L "init" 0 4 1 "FUNCTION"
+F G "initStepper" 0 90 "void()" `668 
+F G "stepperRotateSingleRight" 0 96 "void()" `670 
+C L "stepperRotateSingleRight" 0 4 1 "FUNCTION"
+F G "stepperRotateSingleLeft" 0 104 "void()" `671 
+V L "measureTime_ms" 0 116 "int8" `673 
+V L "rotation" 0 116 "int8" `674 
+F G "moveMeasure" 0 117 "int16(int8 measureTime_ms,int8 rotation)" `672 
+V L "measurement" 0 119 "int16" `675 
+V L "timeDelay_us" 0 131 "int8" `679 
+F G "stepperRotate180right" 0 132 "void(int8 timeDelay_us)" `678 
+V L "i" 0 133 "int8" `680 
+V L "timeDelay_us" 0 141 "int8" `682 
+F G "stepperRotate180left" 0 142 "void(int8 timeDelay_us)" `681 
+V L "i" 0 143 "int8" `683 
+F G "MAIN" 0 161 "void()" `684 
 F B "reset_cpu" 0 0
 F B "abs" 1 0
 F B "sleep_ulpwu" 1 0

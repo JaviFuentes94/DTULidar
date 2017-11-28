@@ -1,46 +1,41 @@
 ÀÄ5
-   ÀÄmain  0/284  Ram=1
+   ÀÄMAIN  0/70  Ram=2
       ÃÄ@cinit1  (Inline)  Ram=0
-      ÃÄ@PSTRINGC7_620  0/86  Ram=4
-      ³  ÃÄ@PUTCHAR_1_  0/41  Ram=1
-      ³  ÀÄ@PUTCHAR_1_  0/41  Ram=1
-      ÃÄ@PSTRINGC7_620  0/86  Ram=4
+      ÃÄinit  0/32  Ram=0
+      ÃÄinitStepper  0/8  Ram=0
+      ÃÄmoveMeasure  0/681  Ram=2
+      ³  ÃÄ@delay_ms1  (Inline)  Ram=1
+      ³  ÃÄreadLongRangeSensor  (Inline)  Ram=6
+      ³  ³  ÃÄreadInternalAdc  (Inline)  Ram=1
+      ³  ³  ÃÄrescaleLongRangeSensor  (Inline)  Ram=10
+      ³  ³  ³  ÃÄ@ITOF  (Inline)  Ram=2
+      ³  ³  ³  ÃÄ@MULFF  0/117  Ram=13
+      ³  ³  ³  ÃÄ@DIVFF  0/202  Ram=14
+      ³  ³  ³  ÃÄ@ADDFF  (Inline)  Ram=16
+      ³  ³  ³  ÀÄ@DIVFF  0/202  Ram=14
+      ³  ³  ÃÄ@PSTRINGCN7_620  0/87  Ram=5
+      ³  ³  ³  ÃÄ@PUTCHAR_1_  0/41  Ram=1
+      ³  ³  ³  ÀÄ@PUTCHAR_1_  0/41  Ram=1
+      ³  ³  ÃÄ@PRINTF_LU_620  0/99  Ram=9
+      ³  ³  ³  ÀÄ@PUTCHAR_1_  0/41  Ram=1
+      ³  ³  ÃÄ@PSTRINGCN7_620  0/87  Ram=5
+      ³  ³  ³  ÀÄ*
+      ³  ³  ÃÄ@PRINTF_L32D_620FPFPF  0/226  Ram=13
+      ³  ³  ³  ÃÄ@MULFF  0/117  Ram=13
+      ³  ³  ³  ÃÄ@FTOSD  (Inline)  Ram=5
+      ³  ³  ³  ÃÄ@DIV3232  0/79  Ram=13
+      ³  ³  ³  ÃÄ@PUTCHAR_1_  0/41  Ram=1
+      ³  ³  ³  ÃÄ@PUTCHAR_1_  0/41  Ram=1
+      ³  ³  ³  ÃÄ@PUTCHAR_1_  0/41  Ram=1
+      ³  ³  ³  ÃÄ@PUTCHAR_1_  0/41  Ram=1
+      ³  ³  ³  ÀÄ@DIV3232  0/79  Ram=13
+      ³  ³  ÀÄ@PUTCHAR_1_  0/41  Ram=1
+      ³  ÃÄ@SFTOI  (Inline)  Ram=4
+      ³  ÃÄstepperRotateSingleRight  (Inline)  Ram=1
+      ³  ³  ÀÄ@const627  0/8  Ram=0
+      ³  ÀÄstepperRotateSingleLeft  (Inline)  Ram=1
+      ³     ÀÄ@const627  0/8  Ram=0
+      ÃÄ@PRINTF_LU_620  0/99  Ram=9
       ³  ÀÄ*
-      ÃÄ@PSTRINGC7_620  0/86  Ram=4
-      ³  ÀÄ*
-      ÃÄ@PSTRINGC7_620  0/86  Ram=4
-      ³  ÀÄ*
-      ÃÄ@PSTRINGC7_620  0/86  Ram=4
-      ³  ÀÄ*
-      ÃÄ@PSTRINGC7_620  0/86  Ram=4
-      ³  ÀÄ*
-      ÃÄ@PSTRINGC7_620  0/86  Ram=4
-      ³  ÀÄ*
-      ÃÄ@GETCH_1_  0/60  Ram=1
-      ³  ÀÄ@PUTCHAR_1_  0/41  Ram=1
-      ÃÄ@const627  0/8  Ram=0
-      ÃÄ@delay_us1  0/17  Ram=1
-      ÃÄ@delay_us1  0/17  Ram=1
-      ÃÄ@PSTRINGC7_620  0/86  Ram=4
-      ³  ÀÄ*
-      ÃÄ@const627  0/8  Ram=0
-      ÃÄ@PSTRINGC7_620  0/86  Ram=4
-      ³  ÀÄ*
-      ÃÄ@const627  0/8  Ram=0
-      ÃÄ@PSTRINGC7_620  0/86  Ram=4
-      ³  ÀÄ*
-      ÃÄ@PSTRINGCN7_620  0/87  Ram=5
-      ³  ÃÄ@PUTCHAR_1_  0/41  Ram=1
-      ³  ÀÄ@PUTCHAR_1_  0/41  Ram=1
-      ÃÄ@PRINTF_L32U_620  0/87  Ram=12
-      ³  ÃÄ@DIV3232  0/79  Ram=13
-      ³  ÃÄ@PUTCHAR_1_  0/41  Ram=1
-      ³  ÀÄ@DIV3232  0/79  Ram=13
-      ÃÄ@PSTRINGCN7_620  0/87  Ram=5
-      ³  ÀÄ*
-      ÃÄ@PSTRINGCN7_620  0/87  Ram=5
-      ³  ÀÄ*
-      ÃÄ@PRINTF_L32U_620  0/87  Ram=12
-      ³  ÀÄ*
-      ÀÄ@PSTRINGCN7_620  0/87  Ram=5
-         ÀÄ*
+      ÃÄ@PUTCHAR_1_  0/41  Ram=1
+      ÀÄ@PUTCHAR_1_  0/41  Ram=1
