@@ -1,0 +1,55 @@
+#include <main.h>
+//#include "lcd16216.c"
+
+#define PWM_PERIOD_VAL 199   //250   // Calculated
+#define PWM_DUTY_MIN 0
+#define PWM_DUTY_MAX 800 //change
+
+int pwm_count = 0;
+
+#int_ccp1
+void ccp1_int(){
+//   output_toggle(PIN_D0);
+   
+   if(pwm_count++ == 200){
+      pwm_count = 0;
+   }
+   
+   if(pwm_count <= 50){
+      output_high(PIN_D0);      
+   }else{
+      output_low(PIN_D0);
+   }
+   
+}
+
+
+void main()
+{
+   
+//   unsigned int16 pwmDutyCycle;
+   // setup oscillator   
+   setup_oscillator(OSC_8MHZ,2);
+   /*
+   // setup capture compare for PWM
+   setup_ccp2(CCP_PWM);
+   //setup_timer_2( prescale, period, postscale);
+   //8MHz/16 = 500KHz       500KHz/250   = 2000    2000/16 = 125Hz
+   setup_timer_2(T2_DIV_BY_16, 255, 16);
+   set_pwm2_duty(400);
+   */
+   CCP_1 = 25;
+   setup_ccp1(CCP_COMPARE_RESET_TIMER|CCP_COMPARE_INT);
+//   setup_ccp1(CCP_COMPARE_RESET_TIMER); 
+//   setup_ccp1(CCP_COMPARE_INT); 
+   setup_timer_1(T1_INTERNAL|T1_DIV_BY_8);
+   
+   enable_interrupts(INT_CCP1);
+   enable_interrupts(GLOBAL);
+
+   while(TRUE){
+      delay_ms(100);
+//      output_toggle(PIN_D0);
+   }
+   
+}
