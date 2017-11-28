@@ -14,10 +14,11 @@
 025     @INTERRUPT_AREA
 026     @INTERRUPT_AREA
 027     @TRIS_C
-028     pwm_count
-029     servo_angle
-02A     @delay_ms1.P1
-02B     ccp1_int.@SCRATCH1
+028-029 pwm_count
+02A-02B servo_angle
+02C     @delay_ms1.P1
+02D     ccp1_int.@SCRATCH1
+02E     ccp1_int.@SCRATCH2
 077     @SCRATCH
 078     @SCRATCH
 078     _RETURN_
@@ -62,20 +63,20 @@ FFF     @INTERRUPT_AREA
 
 ROM Allocation:
 000031  ccp1_int
-000047  @delay_ms1
-00005B  @cinit1
-00005B  MAIN
-000079  @cinit2
+00005B  @delay_ms1
+00006F  @cinit1
+00006F  MAIN
+00008F  @cinit2
 
 Project Directory:
     C:\Users\User\Google Drev\DTU Elektro\5. semester\Digital Instrumentering\30021_project\DTULidar\Servo Test\
 
 Project Files:
-    main.c                                                  [28-nov-17 13:27  CRC=0B42C75C]
+    main.c                                                  [28-nov-17 14:29  CRC=17B1D996]
     main.h                                                  [28-nov-17 13:19  CRC=A618738A]
     ..\..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16F887.h [15-maj-14 12:45  CRC=9CCD99DD]
 
-Source signature=EAF66EA0
+Source signature=F76580DA
 
 Units:
     main (main)

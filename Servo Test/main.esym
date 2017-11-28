@@ -1,7 +1,7 @@
 D G "__PCM__" 0 71 ""5.026""
 D G "__DEVICE__" 0 71 "887"
 D G "__DATE__" 0 71 ""28-nov-17""
-D G "__TIME__" 0 71 ""13:27:49"" "Standard Header file for the PIC16F887 device ////////////////"
+D G "__TIME__" 0 71 ""14:29:21"" "Standard Header file for the PIC16F887 device ////////////////"
 c L "set_tris_a" 2 3 6 "FUNCTION"
 v L "value" 2 39 "int8" `54 
 f B "set_tris_a" 2 39 "void(int8 value)" `53 
@@ -853,8 +853,8 @@ C L "jump_to_isr" 1 10 1 "FUNCTION"
 D G "PWM_PERIOD_VAL" 0 6 "199" "250   // Calculated"
 D G "PWM_DUTY_MIN" 0 7 "0"
 D G "PWM_DUTY_MAX" 0 8 "800" "change"
-V G "pwm_count" 0 10 "int8" `631 
-V G "servo_angle" 0 11 "int8" `632 
+V G "pwm_count" 0 10 "int16" `631 
+V G "servo_angle" 0 11 "int16" `632 
 F G "ccp1_int" 0 15 "void()" `633  "output_toggle(PIN_D0);"
 C L "ccp1_int" 0 4 1 "FUNCTION"
 F G "MAIN" 0 31 "void()" `634 
