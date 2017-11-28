@@ -1,0 +1,147 @@
+004-005 @READ_PROGRAM_MEMORY8.P1
+004-005 @WRITE_PROGRAM_MEMORY8.P2
+015     CCP_1
+015     CCP_1_LOW
+016     CCP_1_HIGH
+01B     CCP_2_LOW
+01B     CCP_2
+01C     CCP_2_HIGH
+020     @TRIS_C
+021-022 readLongRangeSensor.iSensorRead
+021     @delay_ms1.P1
+021     MAIN.@SCRATCH1
+022     MAIN.@SCRATCH2
+023-024 @ITOF.P1
+023-026 @SFTOI.P2
+023     readInternalAdc.channel
+023     readLongRangeSensor.@SCRATCH1
+023     MAIN.@SCRATCH3
+024.0   readInternalAdc.done
+024     readLongRangeSensor.@SCRATCH2
+024     MAIN.@SCRATCH4
+025     readLongRangeSensor.@SCRATCH3
+026     readLongRangeSensor.@SCRATCH4
+027-02A @PRINTF_L32D_620FPFPF.P1
+027-02A @DIVFF.P2
+027-028 @PRINTF_LU_620.P3
+027-02A @ADDFF.P4
+027     @PSTRINGCN7_620.P5
+028     @PSTRINGCN7_620.@SCRATCH1
+029     @PSTRINGCN7_620.@SCRATCH2
+029     @PRINTF_LU_620.@SCRATCH1
+02A     @PSTRINGCN7_620.@SCRATCH3
+02A     @PRINTF_LU_620.@SCRATCH2
+02B-02E @DIVFF.P1
+02B-02E @ADDFF.P2
+02B     @PRINTF_L32D_620FPFPF.P3
+02B     @PSTRINGCN7_620.@SCRATCH4
+02B     @PRINTF_LU_620.@SCRATCH3
+02C     @PRINTF_LU_620.@SCRATCH4
+02C     @PRINTF_L32D_620FPFPF.@SCRATCH1
+02D     @PRINTF_LU_620.@SCRATCH5
+02D     @PRINTF_L32D_620FPFPF.@SCRATCH2
+02E     @PRINTF_LU_620.@SCRATCH6
+02E     @PRINTF_L32D_620FPFPF.@SCRATCH3
+02F     @DIVFF.@SCRATCH1
+02F     @ADDFF.@SCRATCH1
+02F     @PRINTF_LU_620.@SCRATCH7
+02F     @PRINTF_L32D_620FPFPF.@SCRATCH4
+030     @DIVFF.@SCRATCH2
+030     @ADDFF.@SCRATCH2
+030     @PRINTF_L32D_620FPFPF.@SCRATCH5
+031     @DIVFF.@SCRATCH3
+031     @ADDFF.@SCRATCH3
+031     @PRINTF_L32D_620FPFPF.@SCRATCH6
+032     @DIVFF.@SCRATCH4
+032     @ADDFF.@SCRATCH4
+032     @PRINTF_L32D_620FPFPF.@SCRATCH7
+033     @DIVFF.@SCRATCH5
+033     @ADDFF.@SCRATCH5
+033     @PRINTF_L32D_620FPFPF.@SCRATCH8
+034-037 @FTOSD.P1
+034-037 @MULFF.P2
+034     @PUTCHAR_1_.P3
+034-037 @DIV3232.P4
+034     @DIVFF.@SCRATCH6
+034     @ADDFF.@SCRATCH6
+035     @ADDFF.@SCRATCH7
+036     @ADDFF.@SCRATCH8
+038-03B @MULFF.P1
+038-03B @DIV3232.P2
+038     @FTOSD.@SCRATCH1
+03C     @MULFF.@SCRATCH1
+03C     @DIV3232.@SCRATCH1
+03D     @MULFF.@SCRATCH2
+03D     @DIV3232.@SCRATCH2
+03E     @MULFF.@SCRATCH3
+03E     @DIV3232.@SCRATCH3
+03F     @MULFF.@SCRATCH4
+03F     @DIV3232.@SCRATCH4
+040     @MULFF.@SCRATCH5
+040     @DIV3232.@SCRATCH5
+077     @SCRATCH
+078     @SCRATCH
+078     _RETURN_
+079     @SCRATCH
+07A     @SCRATCH
+107.6   C1OUT
+108.6   C2OUT
+10D-10E @WRITE_PROGRAM_MEMORY8.P1
+10D-10E @READ_PROGRAM_MEMORY8.P2
+
+ROM Allocation:
+000004  @const649.call
+000015  @const668.call
+000020  init
+000045  @ITOF
+000062  @MULFF
+0000D7  @DIVFF
+0001A1  @PUTCHAR_1_
+0001CA  @PSTRINGCN7_620
+000221  @DIV3232
+000270  @PRINTF_L32D_620FPFPF
+000297  @FTOSD
+000350  readLongRangeSensor
+000352  readInternalAdc
+0003D4  @ADDFF
+00052B  @SFTOI
+00058F  @PRINTF_LU_620
+000619  @delay_ms1
+00062F  MAIN
+00062F  @cinit1
+00064B  @cinit2
+
+Project Directory:
+    C:\Users\User\Desktop\Week9_2\
+
+Project Files:
+    main.c                                                  [28-nov-17 12:30  CRC=7D66BF92]
+    main.h                                                  [21-nov-17 15:12  CRC=A618738A]
+    ..\..\..\..\Program Files (x86)\PICC\Devices\16F887.h   [15-maj-14 12:45  CRC=9CCD99DD]
+
+Source signature=5D1A66D6
+
+Units:
+    main (main)
+
+Compiler Settings:
+    Processor:      PIC16F887
+    Pointer Size:   16
+    ADC Range:      0-1023
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+    ICD Provisions: Yes
+    Compile Mode:       CCS5
+
+Output Files:
+    XREF file:   main.xsym
+    Errors:      main.err
+    Ext Symbols: main.esym
+    INHX8:       main.hex
+    Symbols:     main.sym
+    List:        main.lst
+    Debug/COFF:  main.cof
+    Project:     main.ccspjt
+    Call Tree:   main.tre
+    Statistics:  main.STA
