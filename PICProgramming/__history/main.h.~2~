@@ -7,9 +7,9 @@
  
 #use delay(internal=8000000,clock_out)
  
-//#use rs232( baud=9600, parity=N, xmit=PIN_C6, rcv=PIN_C7, bits=8, ERRORS)
+#use rs232( baud=9600, parity=N, xmit=PIN_C6, rcv=PIN_C7, bits=8, ERRORS)
  
-#use RS232 (DEBUGGER)
+//#use RS232 (DEBUGGER)
  
 #use  I2C(master, sda=PIN_C4, scl= PIN_C3)
 

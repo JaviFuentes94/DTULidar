@@ -145,6 +145,6 @@ void main()
    printf("Long range read: %f\n", readLongRangeSensor());    
     
 //    printf("Short range read: %lu\n\n", readShortRangeSensor());
-    delay_ms(20);
+    delay_ms(500);
   }
 }
