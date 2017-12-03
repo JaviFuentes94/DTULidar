@@ -6,26 +6,42 @@ void initStepper()
 }
 
 
-void stepperRotateSingleRight()
+void stepperRotateSingleRight(int motor)
 {
      iCurrentPosition = ((iCurrentPosition+1)&3);
      
      /* Set outputs to move the motor */
-     portc = POSITIONS[iCurrentPosition];
+	if(motor == 1)
+	{
+		portc = POSITIONS[iCurrentPosition];
+	}
+	else
+	{
+		portd = POSITIONS[iCurrentPosition];
+	}	
+     
 }
 
-void stepperRotateSingleLeft()
+void stepperRotateSingleLeft(int motor)
 {
-     if(iCurrentPosition == 0)
-     {
-         iCurrentPosition = 3;
-     }
-     else
-     {
-         iCurrentPosition = ((iCurrentPosition-1)&3);
-     }
-     portc = POSITIONS[iCurrentPosition];
-}
+	if(iCurrentPosition == 0)
+	{
+		iCurrentPosition = 3;
+	}
+	else
+	{
+		iCurrentPosition = ((iCurrentPosition-1)&3);
+	}
+	if(motor == 1)
+	{
+		portc = POSITIONS[iCurrentPosition];
+	}
+	else
+	{
+		portd = POSITIONS[iCurrentPosition];
+	}
+
+}	
 
 int16 moveMeasure(int measureTime_ms, int rotation)
 {
@@ -42,29 +58,42 @@ int16 moveMeasure(int measureTime_ms, int rotation)
       return measurement;
 }
 
-void stepperRotate180right(int timeDelay_us)
+void stepperRotate180right(int timeDelay_us, int motor)
 {
-      for(unsigned int8 i = 1; i<=100; i++)
+    for(unsigned int8 i = 1; i<=100; i++)
     {
-       portc = POSITIONS[((iCurrentPosition + i)&3)];
-      delay_us(timeDelay_us);
+		if(motor == 1)
+		{
+		   portc = POSITIONS[((iCurrentPosition + i)&3)];
+		}
+		else
+		{
+			portd = POSITIONS[((iCurrentPosition + i)&3)];
+		}
+	  	delay_us(timeDelay_us);
     }
 }
 
 
-void stepperRotate180left(int timeDelay_us)
+void stepperRotate180left(int timeDelay_us, int motor)
 {
-      for(unsigned int8 i = 1; i<=100; i++)
-    {
-       if(iCurrentPosition == 0)
-       {
-           iCurrentPosition = 3;
-       }
-       else
-       {
-           iCurrentPosition = ((iCurrentPosition-1)&3);
-       }
-       portc = POSITIONS[iCurrentPosition];
-          delay_us(timeDelay_us);
-    }
+	for(unsigned int8 i = 1; i<=100; i++)
+	{
+		if(iCurrentPosition == 0)
+		{
+		   iCurrentPosition = 3;
+		}
+		else
+		{
+		   iCurrentPosition = ((iCurrentPosition-1)&3);
+		}
+		if(motor == 1)
+		{
+			portc = POSITIONS[iCurrentPosition];
+		}		  
+		else
+		{
+			delay_us(timeDelay_us);
+		}
+	}
 }
