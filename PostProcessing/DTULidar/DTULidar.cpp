@@ -16,6 +16,8 @@
 #include <pcl/point_types.h>
 #include <pcl/visualization/cloud_viewer.h>
 #include <pcl/io/pcd_io.h>
+#include <pcl/range_image/range_image.h>
+#include <pcl/visualization/range_image_visualizer.h>
 
 #include <Eigen/Dense>
 
@@ -46,21 +48,30 @@ pcl::PointXYZ TransformPoint(PacketDecoder::packet_t packet)
 
 	Eigen::Matrix4f transformationMatrix;
 
-	/*transformationMatrix << cos(z), cos(x)*sin(z), sin(x)*sin(z), 0,
+	transformationMatrix << cos(z), cos(x)*sin(z), sin(x)*sin(z), 0,
 		-sin(z), cos(x)*cos(z), cos(z)*sin(x), 0,
 		0, -sin(x), cos(x), 0,
-		0, 0, 0, 1;*/
+		0, 0, 0, 1;
 
-	transformationMatrix << cos(z), cos(x)*sin(z), sin(x)*sin(z), 0,
+	/*transformationMatrix << cos(z), cos(x)*sin(z), sin(x)*sin(z), 0,
 		-sin(z), sin(x)*sin(z), cos(z)*sin(x), 0,
 		0, cos(x), cos(x), 0,
-		0, 0, 0, 1;
+		0, 0, 0, 1;*/
 
 
 	Eigen::Vector4f resultVector = transformationMatrix*originalVector;
 	//cout << "Resultant point= " << resultVector << endl;
 
 	pcl::PointXYZ point(resultVector(0), resultVector(1), resultVector(2));
+
+	//Eigen::Vector4f transVector (cos(z)*sin(x), sin(z)*sin(x), cos(x), 1);
+
+		//	Eigen::Vector4f resultVector = transformationMatrix*originalVector;
+	//Eigen::Vector4f resultVector = packet.distance*transVector;
+
+	//cout << "Resultant point= " << resultVector << endl;
+
+	//pcl::PointXYZ point(resultVector(0), resultVector(1), resultVector(2));
 
 	return point;
 }
@@ -72,12 +83,11 @@ pcl::PointXYZ TransformPoint(PacketDecoder::packet_t packet)
 0            -sin(alpha_x)                  cos(alpha_x)               0;
 0             0                             0                          1];*/
 
-boost::shared_ptr<pcl::visualization::PCLVisualizer> InitializeVisualization(pcl::PointCloud<pcl::PointXYZ>::Ptr ptrCloud)
+boost::shared_ptr<pcl::visualization::PCLVisualizer> InitializeCloudVisualization(pcl::PointCloud<pcl::PointXYZ>::Ptr ptrCloud)
 {
 	boost::shared_ptr<pcl::visualization::PCLVisualizer> viewer(new pcl::visualization::PCLVisualizer("3D Viewer"));
 	viewer->setBackgroundColor(0, 0, 0);
-	pcl::visualization::PointCloudColorHandlerCustom<pcl::PointXYZ> single_color(ptrCloud, 0, 255, 0);
-	viewer->addPointCloud<pcl::PointXYZ> (ptrCloud, single_color, "cloud");
+	viewer->addPointCloud<pcl::PointXYZ> (ptrCloud, "cloud");
 	viewer->setPointCloudRenderingProperties(pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 3, "cloud");
 	viewer->addCoordinateSystem(1.0);
 	viewer->initCameraParameters();
@@ -92,7 +102,6 @@ void UpdateVisualization(pcl::PointXYZ newPoint, boost::shared_ptr<pcl::visualiz
 
 	viewer->spinOnce(100);
 
-	//viewer.showCloud(ptrCloud);
 }
 
 /*int main(int argc, char** argv)
@@ -141,7 +150,7 @@ int main()
 	SerialPort serialport(portName);
 
 	pcl::PointCloud<pcl::PointXYZ>::Ptr ptrCloud(new pcl::PointCloud<pcl::PointXYZ>);
-	boost::shared_ptr<pcl::visualization::PCLVisualizer> viewer = InitializeVisualization(ptrCloud);
+	boost::shared_ptr<pcl::visualization::PCLVisualizer> viewer = InitializeCloudVisualization(ptrCloud);
 
 	if (serialport.isConnected()) cout << "Connected" << endl;
 	else cout << "Error. Couldn't connect to device";
@@ -162,8 +171,10 @@ int main()
 			pcl::PointXYZ transformedPoint = TransformPoint(packet);
 
 			UpdateVisualization(transformedPoint, viewer, ptrCloud);
-
-			
+		}
+		else if (bytesRead !=0)
+		{
+			cout << "Packet Lost"; 
 		}
 		Sleep(10);
 	}
