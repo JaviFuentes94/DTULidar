@@ -93,7 +93,9 @@ void stepperRotate180left(int timeDelay_us, int motor)
 		}		  
 		else
 		{
-			delay_us(timeDelay_us);
+			portd = POSITIONS[iCurrentPosition];
 		}
+			delay_us(timeDelay_us);
+
 	}
 }
