@@ -81,8 +81,11 @@ void stepperRotate180left(int timeDelay_us)
 
 
 
+
 void main()
 {
+
+
 		setup_oscillator(OSC_8MHZ,2);
 	 
  		initStepper()
