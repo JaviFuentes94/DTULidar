@@ -1,6 +1,3 @@
-
-
-
 #include <main.h>
 
 #define CHANNEL_LONG_RANGE  4
@@ -28,44 +25,54 @@ unsigned int16 readInternalAdc(unsigned int8 channel)
 float readLongRangeSensor()
 {
   unsigned int16 iSensorRead;
-  iSensorRead = readInternalAdc(CHANNEL_LONG_RANGE);
+  float fSensorRead;
+  float fCumulativeMeasurement = 0.0f;
   
-  if(iSensorRead >= 1000)
+  for(int i = 0; i <5; i++)
   {
-   iSensorRead = 0;
-	}
-	else
-  {
-		if(iSensorRead <= 573 )
-		{
-			iSensorRead = 5;
-		}
-		else
-		{
-      iSensorRead = 122f / (( 2.5f * ((float) iSensorRead) ) / 1024f - 1.28f);
-      printf("iSensorRead: %Lu \t in volt: %f \t\t", iSensorRead, (iSensorRead * 2.5f) / 1024f );
-    }
-  }
-   return iSensorRead;
+     iSensorRead = readInternalAdc(CHANNEL_LONG_RANGE);
+  
+     if(iSensorRead >= 1000)
+     {
+      fSensorRead = 0;
+      }
+      else
+     {
+         if(iSensorRead <= 573 )
+         {
+            fSensorRead = 500;
+         }
+         else
+         {
+         fSensorRead = 122f / (( 2.5f * ((float) iSensorRead) ) / 1024f - 1.28f);
+   //      printf("iSensorRead: %Lu \t in volt: %f \t\t", iSensorRead, (iSensorRead * 2.5f) / 1024f );
+       }
+     }
+     
+     fCumulativeMeasurement += fSensorRead; 
+   }
+  
+   return (fCumulativeMeasurement/5.0);
 }
 
-unsigned int16 readShortRangeSensor()
+float readShortRangeSensor()
 {
   unsigned int16 iSensorRead;
+  float fSensorRead;
   iSensorRead = readInternalAdc(CHANNEL_SHORT_RANGE);
-	// measurement below 30cm
-  	if(iSensorRead >= 819 ) 
-		iSensorRead = 30;
-	else 
-	{
-		// measurement above 150
-		if( iSensorRead <= 204 )
-			iSensorRead = 150;
-		else
-			iSensorRead = = 50f / (( 2.5f * ((float) iSensorRead2) ) / 1024f - 0.1f); 
-	}
-	
-  return iSensorRead;
+   // measurement below 30cm
+     if(iSensorRead >= 819 ) 
+      fSensorRead = 30;
+   else 
+   {
+      // measurement above 150
+      if( iSensorRead <= 204 )
+         fSensorRead = 150;
+      else
+         fSensorRead = 50f / (( 2.5f * ((float) iSensorRead) ) / 1024f - 0.1f); 
+   }
+   
+  return fSensorRead;
 }
 
 void init()
@@ -89,8 +96,8 @@ void main()
 
   while(1)
   {
-//   printf("Long range read: %lu\n", readLongRangeSensor());
-   printf("Long range read: %f\n", readLongRangeSensor());    
+   printf("Long range read: %f\t", readLongRangeSensor());
+   printf("Short range read: %f\n", readShortRangeSensor());    
     
 //    printf("Short range read: %lu\n\n", readShortRangeSensor());
     delay_ms(20);

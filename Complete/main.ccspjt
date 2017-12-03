@@ -15,7 +15,7 @@ Type=4
 
 [Opened Files]
 1=main.c
-t1=1
+t1=23
 2=main.h
 t2=1
 3=..\..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16F887.h

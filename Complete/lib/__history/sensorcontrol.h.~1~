@@ -10,6 +10,6 @@ void initSensors(void);
 unsigned int16 readInternalAdc(unsigned int8 channel);
 float readLongRangeSensor();
 float readShortRangeSensor();
-int16 readRangeSensor();
+float readRangeSensor();
 
 #endif

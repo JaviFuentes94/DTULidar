@@ -12,18 +12,18 @@ void initSensors()
   set_adc_channel(6);
 }
 
-int16 readRangeSensor()
+float readRangeSensor()
 {
    float fShortMeasRange = readShortRangeSensor();
    float fLongMeasRange = readLongRangeSensor();
    
    if(fShortMeasRange == 150)
    {
-      return ((int16)fLongMeasRange);
+      return fLongMeasRange;
    }
    else
    {
-      return ((int16)fShortMeasRange);
+      return fShortMeasRange;
    }
 }
 
@@ -103,5 +103,5 @@ float readShortRangeSensor()
    fCumulativeMeasurement += fSensorRead;
   }
   
-  return (fCumulativeMeasurement/10.0);
+  return fCumulativeMeasurement;
 }

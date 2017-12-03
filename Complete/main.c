@@ -3,7 +3,7 @@
 #include "lib/sensorControl.c"
 
 
-void sendMeasurements(signed int8 zAngle, signed int8 yAngle, float distance)
+void sendMeasurements(signed int8 zAngle, signed int8 yAngle, unsigned int16 distance)
 {
    char characterToSend;
    characterToSend = *((char*)&(zAngle));
@@ -12,17 +12,9 @@ void sendMeasurements(signed int8 zAngle, signed int8 yAngle, float distance)
    characterToSend = *((char*)&(yAngle));
    putc((int)characterToSend);
    
-   characterToSend = *(((char*)&(distance))+3);
-   //printf("First byte: %x", (int)characterToSend);
-   putc((int)characterToSend);
-   characterToSend = *(((char*)&(distance))+2);
-   //printf("Sec byte: %x", (int)characterToSend);
+   characterToSend = *((char*)&(distance));
    putc((int)characterToSend);
    characterToSend = *(((char*)&(distance))+1);
-   //printf("Third byte: %x", (int)characterToSend);
-   putc((int)characterToSend);
-   characterToSend = *((char*)&(distance));
-   //printf("Fourth byte: %x", (int)characterToSend);
    putc((int)characterToSend);
 }
 
@@ -30,7 +22,7 @@ void sendMeasurements(signed int8 zAngle, signed int8 yAngle, float distance)
 void main()
 {
    /* Declarations */
-   float fRangeMeasurement;
+   unsigned int16 iRangeMeasurement;
    signed int8 iAngleZ, iAngleX;
 
       /* Initialize hardware */
@@ -45,10 +37,9 @@ void main()
          /* Wait for the motor to settle */
          delay_ms(50);
          /* Read the sensor value */
-         //fRangeMeasurement = readRangeSensor();
-         fRangeMeasurement = 121.21;
+         iRangeMeasurement = readRangeSensor();
          /* Send the measurements to the PC */
-         sendMeasurements(iAngleX, iAngleZ, fRangeMeasurement);
+         sendMeasurements(iAngleX, iAngleZ, iRangeMeasurement);
          //printf("%f\n", fRangeMeasurement);
      }
    

@@ -103,5 +103,5 @@ float readShortRangeSensor()
    fCumulativeMeasurement += fSensorRead;
   }
   
-  return (fCumulativeMeasurement/10.0);
+  return fCumulativeMeasurement;
 }

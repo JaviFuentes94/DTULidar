@@ -1,4 +1,4 @@
 >>> Warning 202 "C:\Users\User\Google Drev\DTU Elektro\5. semester\Digital Instrumentering\30021_project\DTULidar\Complete\lib\stepperControl.h" Line 15(16,22): Variable never used:   iDelay
-      Memory usage:   ROM=5%      RAM=6% - 9%
+      Memory usage:   ROM=20%      RAM=6% - 17%
       0 Errors,  1 Warnings.
 Build Successful.
