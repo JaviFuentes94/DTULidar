@@ -1,6 +1,6 @@
 
 #include <main.h>
-#include "stepperControl.h"
+#include "lib/stepperControl.c"
 
 
 
@@ -161,17 +161,16 @@ void stepperRotate180left(int timeDelay_us)
 
 void readLongRangeSensor()
 {
-	return 1;
 }
 
 void main()
 {
-	setup_oscillator(OSC_8MHZ,2);
-	initStepper();
-	while(TRUE)
-	{
-		stepperRotateSingleRight(1);
-		delay_ms(500);
-		
-	}
+   setup_oscillator(OSC_8MHZ,2);
+   initStepper();
+   while(TRUE)
+   {
+      stepperRotateSingleRight(1);
+      delay_ms(500);
+      
+   }
 }

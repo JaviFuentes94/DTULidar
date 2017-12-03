@@ -1,4 +1,4 @@
->>> Warning 202 "main.c" Line 8(16,22): Variable never used:   iDelay
-      Memory usage:   ROM=21%      RAM=4% - 13%
+>>> Warning 202 "C:\Users\User\Google Drev\DTU Elektro\5. semester\Digital Instrumentering\30021_project\DTULidar\Stepper Test\lib\stepperControl.h" Line 9(16,22): Variable never used:   iDelay
+      Memory usage:   ROM=1%      RAM=3% - 4%
       0 Errors,  1 Warnings.
 Build Successful.
