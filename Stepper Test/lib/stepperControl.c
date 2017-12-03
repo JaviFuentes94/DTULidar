@@ -12,7 +12,7 @@ void stepperMotorSequenceTop()
    iGlobalPosition[TOP_MOTOR]++;
    bGlobalGoRight = !bGlobalGoRight;
 
-   if(iGlobalPosition[TOP_MOTOR] == 30)
+   if(iGlobalPosition[TOP_MOTOR] == TOP_MOTOR_LIMIT)
    {
       bSequenceOver = True;
    }
@@ -27,7 +27,7 @@ void stepperMotorSequence()
 
    if(bGlobalGoRight == TRUE)
    {
-      if(iGlobalPosition[BOTTOM_MOTOR] == 90)
+      if(iGlobalPosition[BOTTOM_MOTOR] == BOTTOM_MOTOR_LIMIT)
       {
          stepperMotorSequenceTop();
       }
@@ -39,7 +39,7 @@ void stepperMotorSequence()
    }
    else
    {
-      if(iGlobalPosition[BOTTOM_MOTOR] == -90)
+      if(iGlobalPosition[BOTTOM_MOTOR] == (-1*BOTTOM_MOTOR_LIMIT))
       {
          stepperMotorSequenceTop();
       }

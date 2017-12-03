@@ -6,6 +6,8 @@
 #BYTE portd = 8      // PIC16F887 datasheet page 25
 #define BOTTOM_MOTOR 0 
 #define TOP_MOTOR 1
+#define BOTTOM_MOTOR_LIMIT 45
+#define TOP_MOTOR_LIMIT 30
 
 /* Globals */
 BYTE const POSITIONS[4] = { 0b0101, 0b1001, 0b1010, 0b0110 };
