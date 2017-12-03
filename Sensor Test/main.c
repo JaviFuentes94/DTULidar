@@ -53,7 +53,18 @@ unsigned int16 readShortRangeSensor()
 {
   unsigned int16 iSensorRead;
   iSensorRead = readInternalAdc(CHANNEL_SHORT_RANGE);
-  /* Add conversion formulas here */
+	// measurement below 30cm
+  	if(iSensorRead >= 819 ) 
+		iSensorRead = 30;
+	else 
+	{
+		// measurement above 150
+		if( iSensorRead <= 204 )
+			iSensorRead = 150;
+		else
+			iSensorRead = = 50f / (( 2.5f * ((float) iSensorRead2) ) / 1024f - 0.1f); 
+	}
+	
   return iSensorRead;
 }
 
