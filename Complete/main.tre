@@ -1,0 +1,19 @@
+ÀÄ5
+   ÀÄMAIN  0/94  Ram=6
+      ÃÄ@cinit1  (Inline)  Ram=0
+      ÃÄinitStepper  0/11  Ram=0
+      ÃÄinitSensors  0/32  Ram=0
+      ÃÄstepperMotorSequence  0/93  Ram=6
+      ³  ÃÄstepperMotorSequenceTop  0/11  Ram=0
+      ³  ³  ÀÄstepperRotateSingleRight  0/41  Ram=4
+      ³  ³     ÃÄ@const627  0/8  Ram=0
+      ³  ³     ÀÄ@const627  0/8  Ram=0
+      ³  ÃÄstepperRotateSingleRight  0/41  Ram=4
+      ³  ³  ÀÄ*
+      ³  ÃÄstepperMotorSequenceTop  0/11  Ram=0
+      ³  ³  ÀÄ*
+      ³  ÀÄstepperRotateSingleLeft  (Inline)  Ram=4
+      ³     ÃÄ@const627  0/8  Ram=0
+      ³     ÀÄ@const627  0/8  Ram=0
+      ÃÄ@delay_ms1  0/22  Ram=1
+      ÀÄsendMeasurements  0/81  Ram=9

@@ -1,0 +1,102 @@
+004-005 @WRITE_PROGRAM_MEMORY8.P1
+004-005 @READ_PROGRAM_MEMORY8.P2
+007     portc
+008     portd
+015     CCP_1
+015     CCP_1_LOW
+016     CCP_1_HIGH
+01B     CCP_2
+01B     CCP_2_LOW
+01C     CCP_2_HIGH
+020     rs232_errors
+021-022 iCurrentState
+023-026 iDelay
+027-028 iGlobalPosition
+029.0   bSequenceOver
+029.1   bGlobalGoRight
+02A     @TRIS_C
+02B-02E MAIN.fRangeMeasurement
+02F     MAIN.iAngleZ
+030     MAIN.iAngleX
+031     sendMeasurements.zAngle
+031     @delay_ms1.P1
+031-032 stepperMotorSequence.angleX
+032     sendMeasurements.yAngle
+033-036 sendMeasurements.distance
+033-034 stepperMotorSequence.angleZ
+035     stepperRotateSingleLeft.motor
+035     stepperRotateSingleRight.motor
+035     stepperMotorSequence.@SCRATCH1
+036     stepperMotorSequence.@SCRATCH2
+036     stepperRotateSingleRight.@SCRATCH1
+036     stepperRotateSingleLeft.@SCRATCH1
+037     sendMeasurements.characterToSend
+037     stepperRotateSingleRight.@SCRATCH2
+037     stepperRotateSingleLeft.@SCRATCH2
+038     stepperRotateSingleRight.@SCRATCH3
+038     stepperRotateSingleLeft.@SCRATCH3
+038     sendMeasurements.@SCRATCH1
+039     sendMeasurements.@SCRATCH2
+077     @SCRATCH
+078     @SCRATCH
+078     _RETURN_
+079     @SCRATCH
+07A     @SCRATCH
+107.6   C1OUT
+108.6   C2OUT
+10D-10E @WRITE_PROGRAM_MEMORY8.P1
+10D-10E @READ_PROGRAM_MEMORY8.P2
+
+ROM Allocation:
+000004  POSITIONS.call
+000008  POSITIONS.data
+00000C  initStepper
+000017  initSensors
+000037  stepperRotateSingleRight
+000060  stepperMotorSequenceTop
+00006B  stepperMotorSequence
+000080  stepperRotateSingleLeft
+0000C8  @delay_ms1
+0000DE  sendMeasurements
+00012F  MAIN
+00012F  @cinit1
+00015D  @cinit2
+
+Project Directory:
+    C:\Users\User\Google Drev\DTU Elektro\5. semester\Digital Instrumentering\30021_project\DTULidar\Complete\
+
+Project Files:
+    main.c                                                  [03-dec-17 19:51  CRC=39A46901]
+    main.h                                                  [03-dec-17 19:51  CRC=F817D64F]
+    ..\..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16F887.h [15-maj-14 12:45  CRC=9CCD99DD]
+    lib\stepperControl.c                                    [03-dec-17 18:15  CRC=F324F3F4]
+    lib\stepperControl.h                                    [03-dec-17 18:15  CRC=470DE6FB]
+    lib\sensorControl.c                                     [03-dec-17 19:09  CRC=B89CB7DA]
+    lib\sensorControl.h                                     [03-dec-17 17:57  CRC=34F1C27D]
+
+Source signature=2B3CF0F0
+
+Units:
+    main (main)
+
+Compiler Settings:
+    Processor:      PIC16F887
+    Pointer Size:   16
+    ADC Range:      0-1023
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+    ICD Provisions: Yes
+    Compile Mode:       CCS5
+
+Output Files:
+    XREF file:   main.xsym
+    Errors:      main.err
+    Ext Symbols: main.esym
+    INHX8:       main.hex
+    Symbols:     main.sym
+    List:        main.lst
+    Debug/COFF:  main.cof
+    Project:     main.ccspjt
+    Call Tree:   main.tre
+    Statistics:  main.STA

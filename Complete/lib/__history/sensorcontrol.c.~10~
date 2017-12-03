@@ -19,7 +19,7 @@ float readRangeSensor()
    
    if(fShortMeasRange == 150)
    {
-      return fLongMeasRange;
+      return fLongMeasRange
    }
    else
    {

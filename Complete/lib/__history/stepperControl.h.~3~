@@ -25,7 +25,7 @@ int16 moveMeasure(int measureTime_ms, int rotation);
 void stepperRotate180right(int timeDelay_us, int motor);
 void stepperRotate180left(int timeDelay_us, int motor);
 void stepperMotorSequenceTop(void);
-void stepperMotorSequence(signed int8 * angleX, signed int8 * angleZ);
+void stepperMotorSequence(signed int8 * angleZ, signed int8 * angleX);
 
 #endif
 

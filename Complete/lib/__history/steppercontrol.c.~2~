@@ -19,7 +19,7 @@ void stepperMotorSequenceTop()
    }
 }
 
-void stepperMotorSequence(signed int8 * angleX, signed int8 * angleZ)
+void stepperMotorSequence(signed int8 * angleZ, signed int8 * angleX)
 {
    if(bSequenceOver)
    {

@@ -19,7 +19,7 @@ void stepperMotorSequenceTop()
    }
 }
 
-void stepperMotorSequence(signed int8 * angleX, signed int8 * angleZ)
+void stepperMotorSequence()
 {
    if(bSequenceOver)
    {
@@ -50,9 +50,6 @@ void stepperMotorSequence(signed int8 * angleX, signed int8 * angleZ)
          iGlobalPosition[BOTTOM_MOTOR]--;               
       }
    }
-   
-   *angleZ = iGlobalPosition[BOTTOM_MOTOR];
-   *angleX = iGlobalPosition[TOP_MOTOR];
 }
 
 void stepperRotateSingleRight(int1 motor)

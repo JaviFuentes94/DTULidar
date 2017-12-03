@@ -14,17 +14,14 @@ void initSensors()
 
 float readRangeSensor()
 {
-   float fShortMeasRange = readShortRangeSensor();
-   float fLongMeasRange = readLongRangeSensor();
+   float fMeasRange = readShortRangeSensor();
+  
+   if(fMeasRange == 150)
+   {
+      fMeasRange = readLongRangeSensor();
+   }
    
-   if(fShortMeasRange == 150)
-   {
-      return fLongMeasRange;
-   }
-   else
-   {
-      return fShortMeasRange;
-   }
+   return fMeasRange;
 }
 
 unsigned int16 readInternalAdc(unsigned int8 channel)
@@ -75,23 +72,17 @@ float readLongRangeSensor()
      fCumulativeMeasurement += fSensorRead; 
    }
   
-   return (fCumulativeMeasurement/10.0f);
+   return (fCumulativeMeasurement/5.0);
 }
 
 float readShortRangeSensor()
 {
   unsigned int16 iSensorRead;
   float fSensorRead;
-  float fCumulativeMeasurement = 0;
-  
-  for(int i = 0; i<10; i++)
-  {
-   iSensorRead = readInternalAdc(CHANNEL_SHORT_RANGE);
+  iSensorRead = readInternalAdc(CHANNEL_SHORT_RANGE);
    // measurement below 30cm
-   if(iSensorRead >= 724 )
-   {
+     if(iSensorRead >= 819 ) 
       fSensorRead = 30;
-   }
    else 
    {
       // measurement above 150
@@ -100,8 +91,6 @@ float readShortRangeSensor()
       else
          fSensorRead = 50f / (( 2.5f * ((float) iSensorRead) ) / 1024f - 0.1f); 
    }
-   fCumulativeMeasurement += fSensorRead;
-  }
-  
-  return fCumulativeMeasurement;
+   
+  return fSensorRead;
 }

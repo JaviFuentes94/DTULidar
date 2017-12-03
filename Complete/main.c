@@ -12,38 +12,44 @@ void sendMeasurements(signed int8 zAngle, signed int8 yAngle, float distance)
    characterToSend = *((char*)&(yAngle));
    putc((int)characterToSend);
    
-   characterToSend = *((char*)&(distance));
+   characterToSend = *(((char*)&(distance))+3);
+   //printf("First byte: %x", (int)characterToSend);
+   putc((int)characterToSend);
+   characterToSend = *(((char*)&(distance))+2);
+   //printf("Sec byte: %x", (int)characterToSend);
    putc((int)characterToSend);
    characterToSend = *(((char*)&(distance))+1);
-   putc((int)character ToSend);
-   characterToSend = *(((char*)&(distance))+2);
+   //printf("Third byte: %x", (int)characterToSend);
    putc((int)characterToSend);
-   characterToSend = *(((ch ar*)&(distance))+3);
+   characterToSend = *((char*)&(distance));
+   //printf("Fourth byte: %x", (int)characterToSend);
    putc((int)characterToSend);
 }
 
 
 void main()
 {
-	/* Declarations */
-	float fRangeMeasurement;
-	signed int8 iAngleZ, iAngleX;
+   /* Declarations */
+   float fRangeMeasurement;
+   signed int8 iAngleZ, iAngleX;
 
-   	/* Initialize hardware */
-   	setup_oscillator(OSC_8MHZ,2);
-   	initStepper();
-   	initSensors();
+      /* Initialize hardware */
+      setup_oscillator(OSC_8MHZ,2);
+      initStepper();
+      initSensors();
 
-   	while(TRUE)
-   	{
-   		/* Move the motor and recieve motors positions */
-      	stepperMotorSequence(&iAngleX, &iAngleZ);
-      	/* Wait for the motor to settle */
-      	delay_ms(50);
-      	/* Read the sensor value */
-      	fRangeMeasurement = readRangeSensor();
-      	/* Send the measurements to the PC */
-      	sendMeasurements(iAngleX, iAngleZ, fRangeMeasurement);
-  	}
+      while(TRUE)
+      {
+         /* Move the motor and recieve motors positions */
+         stepperMotorSequence(&iAngleX, &iAngleZ);
+         /* Wait for the motor to settle */
+         delay_ms(50);
+         /* Read the sensor value */
+         //fRangeMeasurement = readRangeSensor();
+         fRangeMeasurement = 121.21;
+         /* Send the measurements to the PC */
+         sendMeasurements(iAngleX, iAngleZ, fRangeMeasurement);
+         //printf("%f\n", fRangeMeasurement);
+     }
    
 }
