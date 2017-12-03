@@ -12,25 +12,6 @@ unsigned int32 iDelay = 5000; // delay default 5ms
 #define CHANNEL_LONG_RANGE  4
 #define CHANNEL_SHORT_RANGE 6
 
-float rescaleLongRangeSensor(unsigned int16 adcValue)
-{
-  float rescaledValue = 0.0;
-  
-  if(adcValue >= 1000)
-  {
-      rescaledValue = 0.0;
-  }
-  else if(adcValue <= 573)
-  {
-      rescaledValue = 5.0;
-  }
-  else
-  {
-      rescaledValue = 122.0f / (( 2.5f * ((float) adcValue) ) / 1024f - 1.28f);
-  }  
-  return rescaledValue;
-}
-
 unsigned int16 readInternalAdc(unsigned int8 channel)
 {
   set_adc_channel(channel);
@@ -53,11 +34,25 @@ unsigned int16 readInternalAdc(unsigned int8 channel)
 float readLongRangeSensor()
 {
   unsigned int16 iSensorRead;
-  float rescaledValue;
   iSensorRead = readInternalAdc(CHANNEL_LONG_RANGE);
-  rescaledValue = rescaleLongRangeSensor(iSensorRead);
-  printf("Original value: %Lu   Rescaled value: %f\n", iSensorRead, rescaledValue);
-  return rescaledValue;
+  
+  if(iSensorRead >= 1000)
+  {
+   iSensorRead = 0;
+   }
+   else
+  {
+      if(iSensorRead <= 573 )
+      {
+         iSensorRead = 5;
+      }
+      else
+      {
+      iSensorRead = 122f / (( 2.5f * ((float) iSensorRead) ) / 1024f - 1.28f);
+      printf("iSensorRead: %Lu \t in volt: %f \t\t", iSensorRead, (iSensorRead * 2.5f) / 1024f );
+    }
+  }
+   return iSensorRead;
 }
 
 unsigned int16 readShortRangeSensor()
@@ -157,21 +152,8 @@ void stepperRotate180left(int timeDelay_us)
 
 
 
-
 void main()
 {
-<<<<<<< HEAD
-
-
-		setup_oscillator(OSC_8MHZ,2);
-	 
- 		initStepper()
-  	while(TRUE)
-   	{
-			int16 moveMeasure(int measureTime, int rotation)
-			moveMeasure(100, 1)	// delay 100ms rotate right
-   	}
-=======
       setup_oscillator(OSC_8MHZ,2);
        init();
        initStepper();
@@ -179,5 +161,4 @@ void main()
       {
          printf("%Lu \n", moveMeasure(100, 1));   // delay 100ms rotate right
       }
->>>>>>> 27327712b79220b4cc872ee3b37734a6e1c7fb63
 }
