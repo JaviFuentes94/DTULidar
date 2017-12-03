@@ -1,95 +1,124 @@
 #include "stepperControl.h"
 
+
 void initStepper()
 {
    set_tris_c(0xF0);
 }
 
-
-void stepperRotateSingleRight(int motor)
+void stepperMotorSequenceTop()
 {
-     iCurrentPosition = ((iCurrentPosition+1)&3);
+   stepperRotateSingleRight(TOP_MOTOR);
+   iGlobalPosition[TOP_MOTOR]++;
+   bGlobalGoRight = !bGlobalGoRight;
+
+   if(iGlobalPosition[TOP_MOTOR] == 30)
+   {
+      bSequenceOver = True;
+   }
+}
+
+void stepperMotorSequence()
+{
+   if(bSequenceOver)
+   {
+      return;
+   }
+
+   if(bGlobalGoRight == TRUE)
+   {
+      if(iGlobalPosition[BOTTOM_MOTOR] == 90)
+      {
+         stepperMotorSequenceTop();
+      }
+      else
+      {
+         stepperRotateSingleRight(BOTTOM_MOTOR);      
+         iGlobalPosition[BOTTOM_MOTOR]++;         
+      }
+   }
+   else
+   {
+      if(iGlobalPosition[BOTTOM_MOTOR] == -90)
+      {
+         stepperMotorSequenceTop();
+      }
+      else
+      {
+         stepperRotateSingleLeft(BOTTOM_MOTOR);      
+         iGlobalPosition[BOTTOM_MOTOR]--;               
+      }
+   }
+}
+
+void stepperRotateSingleRight(int1 motor)
+{
+   iCurrentState[motor] = ((iCurrentState[motor]+1)&3);
      
      /* Set outputs to move the motor */
    if(motor == 1)
    {
-      portc = POSITIONS[iCurrentPosition];
+      portc = POSITIONS[iCurrentState[motor]];
    }
    else
    {
-      portd = POSITIONS[iCurrentPosition];
-   }   
-     
+      portd = POSITIONS[iCurrentState[motor]];
+   }        
 }
 
-void stepperRotateSingleLeft(int motor)
+void stepperRotateSingleLeft(int1 motor)
 {
-   if(iCurrentPosition == 0)
+   if(iCurrentState[motor] == 0)
    {
-      iCurrentPosition = 3;
+      iCurrentState[motor] = 3;
    }
    else
    {
-      iCurrentPosition = ((iCurrentPosition-1)&3);
+      iCurrentState[motor] = ((iCurrentState[motor]-1)&3);
    }
    if(motor == 1)
    {
-      portc = POSITIONS[iCurrentPosition];
+      portc = POSITIONS[iCurrentState[motor]];
    }
    else
    {
-      portd = POSITIONS[iCurrentPosition];
+      portd = POSITIONS[iCurrentState[motor]];
    }
 
 }   
-/*
-int16 moveMeasure(int measureTime_ms, int rotation)
-{
-      delay_ms(measureTime_ms);
-      int16 measurement = readLongRangeSensor();
-      if(rotation == TRUE)
-      {
-            stepperRotateSingleRight();
-      }
-      else   
-      {
-            stepperRotateSingleLeft();
-      }   
-      return measurement;
-}*/
 
-void stepperRotate180right(int timeDelay_us, int motor)
+void stepperRotate180right(int timeDelay_us, int1 motor)
 {
     for(unsigned int8 i = 1; i<=100; i++)
     {
       if(motor == 1)
       {
-         portc = POSITIONS[((iCurrentPosition + i)&3)];
+         portc = POSITIONS[((iCurrentState[motor] + i)&3)];
       }
       else
       {
-         portd = POSITIONS[((iCurrentPosition + i)&3)];
+         portd = POSITIONS[((iCurrentState[motor] + i)&3)];
       }
         delay_us(timeDelay_us);
     }
 }
 
 
-void stepperRotate180left(int timeDelay_us, int motor)
+void stepperRotate180left(int timeDelay_us, int1 motor)
 {
    for(unsigned int8 i = 1; i<=100; i++)
    {
-      if(iCurrentPosition == 0)
+      if(iCurrentState[motor] == 0)
       {
-         iCurrentPosition = 3;
+         iCurrentState[motor] = 3;
       }
       else
       {
-         iCurrentPosition = ((iCurrentPosition-1)&3);
+         iCurrentState[motor] = ((iCurrentState[motor]-1)&3);
       }
       if(motor == 1)
       {
-         portc = POSITIONS[iCurrentPosition];
+         portc = POSITIONS[iCurrentState[motor]];
       }        
       else
       {
