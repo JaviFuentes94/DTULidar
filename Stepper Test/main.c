@@ -1,13 +1,11 @@
 
 #include <main.h>
+#include "stepperControl.h"
 
-/*Declarations*/
-#BYTE portc = 7      // Port used to control motor
-BYTE const POSITIONS[4] = { 0b0101, 0b1001, 0b1010, 0b0110 };
-unsigned int8 iCurrentPosition = 0; /* This variable keeps track of the current position */
-unsigned int32 iDelay = 5000; // delay default 5ms
+
 
 ////////////////////////////////////////////////////////////////////
+/*
 
 #define CHANNEL_LONG_RANGE  4
 #define CHANNEL_SHORT_RANGE 6
@@ -64,28 +62,32 @@ unsigned int16 readShortRangeSensor()
 {
   unsigned int16 iSensorRead;
   iSensorRead = readInternalAdc(CHANNEL_SHORT_RANGE);
-  /* Add conversion formulas here */
+  /* Add conversion formulas here 
   return iSensorRead;
 }
 
+*/
+
+/*
 void init()
 {
 //  setup_oscillator(OSC_8MHZ,2);
  
-  /* Setup the  ADC to 2.5V */
+  // Setup the  ADC to 2.5V 
   //setup_vref(VREF_LOW | 0x0C);
    setup_vref(0xEC);
   setup_adc(ADC_CLOCK_DIV_32);
   setup_adc_ports (sAN4 | sAN6 | VSS_VREF);
    
-  /* Initially start with channel 6 */
+  //Initially start with channel 6 
   set_adc_channel(6);
 }
+*/
 
 
 ////////////////////////////////////////////////////////////////////
 
-
+/*
 void initStepper()
 {
    set_tris_c(0xF0);
@@ -96,7 +98,6 @@ void stepperRotateSingleRight()
 {
      iCurrentPosition = ((iCurrentPosition+1)&3);
      
-     /* Set outputs to move the motor */
      portc = POSITIONS[iCurrentPosition];
 }
 
@@ -155,29 +156,22 @@ void stepperRotate180left(int timeDelay_us)
     }
 }
 
+*/
 
 
+void readLongRangeSensor()
+{
+	return 1;
+}
 
 void main()
 {
-<<<<<<< HEAD
-
-
-		setup_oscillator(OSC_8MHZ,2);
-	 
- 		initStepper()
-  	while(TRUE)
-   	{
-			int16 moveMeasure(int measureTime, int rotation)
-			moveMeasure(100, 1)	// delay 100ms rotate right
-   	}
-=======
-      setup_oscillator(OSC_8MHZ,2);
-       init();
-       initStepper();
-     while(TRUE)
-      {
-         printf("%Lu \n", moveMeasure(100, 1));   // delay 100ms rotate right
-      }
->>>>>>> 27327712b79220b4cc872ee3b37734a6e1c7fb63
+	setup_oscillator(OSC_8MHZ,2);
+	initStepper();
+	while(TRUE)
+	{
+		stepperRotateSingleRight(1);
+		delay_ms(500);
+		
+	}
 }
