@@ -4,6 +4,7 @@
 void initStepper()
 {
    set_tris_c(0xF0);
+   set_tris_d(0xF0);
 }
 
 void stepperMotorSequenceTop()

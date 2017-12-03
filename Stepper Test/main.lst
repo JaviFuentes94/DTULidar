@@ -1,19 +1,19 @@
-CCS PCM C Compiler, Version 5.026, 18875               03-dec-17 12:42
+CCS PCM C Compiler, Version 5.026, 18875               03-dec-17 15:20
 
                Filename:   C:\Users\User\Google Drev\DTU Elektro\5. semester\Digital Instrumentering\30021_project\DTULidar\Stepper Test\main.lst
 
-               ROM used:   117 words (1%)
+               ROM used:   232 words (3%)
                            Largest free fragment is 2048
-               RAM used:   12 (3%) at main() level
-                           13 (4%) worst case
-               Stack used: 1 locations
+               RAM used:   15 (4%) at main() level
+                           19 (5%) worst case
+               Stack used: 3 locations
                Stack size: 7
 
 *
 0000:  NOP
 0001:  MOVLW  00
 0002:  MOVWF  0A
-0003:  GOTO   03C
+0003:  GOTO   0B0
 ....................  
 .................... #include <main.h> 
 .................... #include <16F887.h> 
@@ -47,28 +47,28 @@ CCS PCM C Compiler, Version 5.026, 18875               03-dec-17 12:42
 ....................   
 .................... #use delay(internal=8000000,clock_out) 
 *
-0026:  MOVLW  27
-0027:  MOVWF  04
-0028:  BCF    03.7
-0029:  MOVF   00,W
-002A:  BTFSC  03.2
-002B:  GOTO   039
-002C:  MOVLW  02
-002D:  MOVWF  78
-002E:  CLRF   77
-002F:  DECFSZ 77,F
-0030:  GOTO   02F
-0031:  DECFSZ 78,F
-0032:  GOTO   02E
-0033:  MOVLW  97
-0034:  MOVWF  77
-0035:  DECFSZ 77,F
-0036:  GOTO   035
-0037:  DECFSZ 00,F
-0038:  GOTO   02C
-0039:  BCF    0A.3
-003A:  BCF    0A.4
-003B:  GOTO   071 (RETURN)
+009A:  MOVLW  2A
+009B:  MOVWF  04
+009C:  BCF    03.7
+009D:  MOVF   00,W
+009E:  BTFSC  03.2
+009F:  GOTO   0AD
+00A0:  MOVLW  02
+00A1:  MOVWF  78
+00A2:  CLRF   77
+00A3:  DECFSZ 77,F
+00A4:  GOTO   0A3
+00A5:  DECFSZ 78,F
+00A6:  GOTO   0A2
+00A7:  MOVLW  97
+00A8:  MOVWF  77
+00A9:  DECFSZ 77,F
+00AA:  GOTO   0A9
+00AB:  DECFSZ 00,F
+00AC:  GOTO   0A0
+00AD:  BCF    0A.3
+00AE:  BCF    0A.4
+00AF:  GOTO   0E6 (RETURN)
 ....................   
 .................... //#use rs232( baud=9600, parity=N, xmit=PIN_C6, rcv=PIN_C7, bits=8, ERRORS) 
 ....................   
@@ -85,9 +85,24 @@ CCS PCM C Compiler, Version 5.026, 18875               03-dec-17 12:42
 .................... /*Declarations*/ 
 .................... #BYTE portc = 7            // Port used to control motor 
 .................... #BYTE portd = 8      // PIC16F887 datasheet page 25 
+.................... #define BOTTOM_MOTOR 0  
+.................... #define TOP_MOTOR 1 
+.................... #define BOTTOM_MOTOR_LIMIT 45 
+.................... #define TOP_MOTOR_LIMIT 30 
+....................  
+.................... /* Globals */ 
 .................... BYTE const POSITIONS[4] = { 0b0101, 0b1001, 0b1010, 0b0110 }; 
-.................... unsigned int8 iCurrentPosition = 0; /* This variable keeps track of the current position */ 
+.................... unsigned int8 iCurrentState[2] = { 0 }; /* This variable keeps track of the current state */ 
+*
+00D5:  BCF    03.6
+00D6:  CLRF   20
+00D7:  CLRF   21
 .................... unsigned int32 iDelay = 5000; // delay default 5ms 
+.................... signed int8 iGlobalPosition[2] = { 0 }; 
+00D8:  CLRF   26
+00D9:  CLRF   27
+.................... int1  bSequenceOver = FALSE; 
+.................... int1  bGlobalGoRight = FALSE; 
 ....................  
 .................... void initStepper(void); 
 .................... void stepperRotateSingleRight(int motor); 
@@ -95,9 +110,11 @@ CCS PCM C Compiler, Version 5.026, 18875               03-dec-17 12:42
 .................... int16 moveMeasure(int measureTime_ms, int rotation); 
 .................... void stepperRotate180right(int timeDelay_us, int motor); 
 .................... void stepperRotate180left(int timeDelay_us, int motor); 
-....................  
+.................... void stepperMotorSequenceTop(void); 
+.................... void stepperMotorSequence(void); 
 ....................  
 .................... #endif 
+....................  
 ....................  
 ....................  
 ....................  
@@ -109,115 +126,264 @@ CCS PCM C Compiler, Version 5.026, 18875               03-dec-17 12:42
 000D:  BSF    03.5
 000E:  MOVWF  07
 000F:  BCF    03.5
-0010:  MOVWF  25
-0011:  BCF    0A.3
-0012:  BCF    0A.4
-0013:  GOTO   069 (RETURN)
+0010:  MOVWF  29
+....................    set_tris_d(0xF0); 
+0011:  BSF    03.5
+0012:  MOVWF  08
+0013:  BCF    03.5
+0014:  BCF    0A.3
+0015:  BCF    0A.4
+0016:  GOTO   0E2 (RETURN)
 .................... } 
 ....................  
-....................  
-.................... void stepperRotateSingleRight(int motor) 
+.................... void stepperMotorSequenceTop() 
 .................... { 
-....................      iCurrentPosition = ((iCurrentPosition+1)&3); 
-0014:  MOVLW  01
-0015:  ADDWF  20,W
-0016:  ANDLW  03
-0017:  MOVWF  20
+....................    stepperRotateSingleRight(TOP_MOTOR); 
+*
+0040:  MOVLW  01
+0041:  MOVWF  2A
+0042:  CALL   017
+....................    iGlobalPosition[TOP_MOTOR]++; 
+0043:  INCF   27,F
+....................    bGlobalGoRight = !bGlobalGoRight; 
+0044:  MOVLW  02
+0045:  XORWF  28,F
+....................  
+....................    if(iGlobalPosition[TOP_MOTOR] == TOP_MOTOR_LIMIT) 
+0046:  MOVF   27,W
+0047:  SUBLW  1E
+0048:  BTFSC  03.2
+....................    { 
+....................       bSequenceOver = True; 
+0049:  BSF    28.0
+....................    } 
+004A:  RETURN
+.................... } 
+....................  
+.................... void stepperMotorSequence() 
+.................... { 
+....................    if(bSequenceOver) 
+004B:  BTFSC  28.0
+....................    { 
+....................       return; 
+004C:  GOTO   097
+....................    } 
+....................  
+....................    if(bGlobalGoRight == TRUE) 
+004D:  BTFSS  28.1
+004E:  GOTO   059
+....................    { 
+....................       if(iGlobalPosition[BOTTOM_MOTOR] == BOTTOM_MOTOR_LIMIT) 
+004F:  MOVF   26,W
+0050:  SUBLW  2D
+0051:  BTFSS  03.2
+0052:  GOTO   055
+....................       { 
+....................          stepperMotorSequenceTop(); 
+0053:  CALL   040
+....................       } 
+0054:  GOTO   058
+....................       else 
+....................       { 
+....................          stepperRotateSingleRight(BOTTOM_MOTOR);       
+0055:  CLRF   2A
+0056:  CALL   017
+....................          iGlobalPosition[BOTTOM_MOTOR]++;          
+0057:  INCF   26,F
+....................       } 
+....................    } 
+0058:  GOTO   097
+....................    else 
+....................    { 
+....................       if(iGlobalPosition[BOTTOM_MOTOR] == (-1*BOTTOM_MOTOR_LIMIT)) 
+0059:  MOVF   26,W
+005A:  SUBLW  D3
+005B:  BTFSS  03.2
+005C:  GOTO   05F
+....................       { 
+....................          stepperMotorSequenceTop(); 
+005D:  CALL   040
+....................       } 
+005E:  GOTO   097
+....................       else 
+....................       { 
+....................          stepperRotateSingleLeft(BOTTOM_MOTOR);       
+005F:  CLRF   2A
+....................          iGlobalPosition[BOTTOM_MOTOR]--;                
+*
+0096:  DECF   26,F
+....................       } 
+....................    } 
+0097:  BCF    0A.3
+0098:  BCF    0A.4
+0099:  GOTO   0E3 (RETURN)
+.................... } 
+....................  
+.................... void stepperRotateSingleRight(int1 motor) 
+.................... { 
+....................    iCurrentState[motor] = ((iCurrentState[motor]+1)&3); 
+*
+0017:  MOVLW  20
+0018:  ADDWF  2A,W
+0019:  MOVWF  78
+001A:  CLRF   7A
+001B:  BTFSC  03.0
+001C:  INCF   7A,F
+001D:  MOVLW  20
+001E:  ADDWF  2A,W
+001F:  MOVWF  04
+0020:  BCF    03.7
+0021:  MOVLW  01
+0022:  ADDWF  00,W
+0023:  ANDLW  03
+0024:  MOVWF  2D
+0025:  MOVF   78,W
+0026:  MOVWF  04
+0027:  BCF    03.7
+0028:  BTFSC  7A.0
+0029:  BSF    03.7
+002A:  MOVF   2D,W
+002B:  MOVWF  00
 ....................       
 ....................      /* Set outputs to move the motor */ 
 ....................    if(motor == 1) 
-0018:  DECFSZ 26,W
-0019:  GOTO   01F
+002C:  DECFSZ 2A,W
+002D:  GOTO   037
 ....................    { 
-....................       portc = POSITIONS[iCurrentPosition]; 
-001A:  MOVF   20,W
-001B:  CALL   004
-001C:  MOVWF  78
-001D:  MOVWF  07
+....................       portc = POSITIONS[iCurrentState[motor]]; 
+002E:  MOVLW  20
+002F:  ADDWF  2A,W
+0030:  MOVWF  04
+0031:  BCF    03.7
+0032:  MOVF   00,W
+0033:  CALL   004
+0034:  MOVWF  78
+0035:  MOVWF  07
 ....................    } 
-001E:  GOTO   023
+0036:  GOTO   03F
 ....................    else 
 ....................    { 
-....................       portd = POSITIONS[iCurrentPosition]; 
-001F:  MOVF   20,W
-0020:  CALL   004
-0021:  MOVWF  78
-0022:  MOVWF  08
-....................    }    
-0023:  BCF    0A.3
-0024:  BCF    0A.4
-0025:  GOTO   06C (RETURN)
-....................       
+....................       portd = POSITIONS[iCurrentState[motor]]; 
+0037:  MOVLW  20
+0038:  ADDWF  2A,W
+0039:  MOVWF  04
+003A:  BCF    03.7
+003B:  MOVF   00,W
+003C:  CALL   004
+003D:  MOVWF  78
+003E:  MOVWF  08
+....................    }         
+003F:  RETURN
 .................... } 
 ....................  
-.................... void stepperRotateSingleLeft(int motor) 
+.................... void stepperRotateSingleLeft(int1 motor) 
 .................... { 
-....................    if(iCurrentPosition == 0) 
+....................    if(iCurrentState[motor] == 0) 
+*
+0060:  MOVLW  20
+0061:  ADDWF  2A,W
+0062:  MOVWF  04
+0063:  BCF    03.7
+0064:  MOVF   00,F
+0065:  BTFSS  03.2
+0066:  GOTO   06E
 ....................    { 
-....................       iCurrentPosition = 3; 
+....................       iCurrentState[motor] = 3; 
+0067:  MOVLW  20
+0068:  ADDWF  2A,W
+0069:  MOVWF  04
+006A:  BCF    03.7
+006B:  MOVLW  03
+006C:  MOVWF  00
 ....................    } 
+006D:  GOTO   083
 ....................    else 
 ....................    { 
-....................       iCurrentPosition = ((iCurrentPosition-1)&3); 
+....................       iCurrentState[motor] = ((iCurrentState[motor]-1)&3); 
+006E:  MOVLW  20
+006F:  ADDWF  2A,W
+0070:  MOVWF  78
+0071:  CLRF   7A
+0072:  BTFSC  03.0
+0073:  INCF   7A,F
+0074:  MOVLW  20
+0075:  ADDWF  2A,W
+0076:  MOVWF  04
+0077:  BCF    03.7
+0078:  MOVLW  01
+0079:  SUBWF  00,W
+007A:  ANDLW  03
+007B:  MOVWF  2D
+007C:  MOVF   78,W
+007D:  MOVWF  04
+007E:  BCF    03.7
+007F:  BTFSC  7A.0
+0080:  BSF    03.7
+0081:  MOVF   2D,W
+0082:  MOVWF  00
 ....................    } 
 ....................    if(motor == 1) 
+0083:  DECFSZ 2A,W
+0084:  GOTO   08E
 ....................    { 
-....................       portc = POSITIONS[iCurrentPosition]; 
+....................       portc = POSITIONS[iCurrentState[motor]]; 
+0085:  MOVLW  20
+0086:  ADDWF  2A,W
+0087:  MOVWF  04
+0088:  BCF    03.7
+0089:  MOVF   00,W
+008A:  CALL   004
+008B:  MOVWF  78
+008C:  MOVWF  07
 ....................    } 
+008D:  GOTO   096
 ....................    else 
 ....................    { 
-....................       portd = POSITIONS[iCurrentPosition]; 
+....................       portd = POSITIONS[iCurrentState[motor]]; 
+008E:  MOVLW  20
+008F:  ADDWF  2A,W
+0090:  MOVWF  04
+0091:  BCF    03.7
+0092:  MOVF   00,W
+0093:  CALL   004
+0094:  MOVWF  78
+0095:  MOVWF  08
 ....................    } 
 ....................  
 .................... }    
-.................... /* 
-.................... int16 moveMeasure(int measureTime_ms, int rotation) 
-.................... { 
-....................       delay_ms(measureTime_ms); 
-....................       int16 measurement = readLongRangeSensor(); 
-....................       if(rotation == TRUE) 
-....................       { 
-....................             stepperRotateSingleRight(); 
-....................       } 
-....................       else    
-....................       { 
-....................             stepperRotateSingleLeft(); 
-....................       }    
-....................       return measurement; 
-.................... }*/ 
 ....................  
-.................... void stepperRotate180right(int timeDelay_us, int motor) 
+.................... void stepperRotate180right(int timeDelay_us, int1 motor) 
 .................... { 
 ....................     for(unsigned int8 i = 1; i<=100; i++) 
 ....................     { 
 ....................       if(motor == 1) 
 ....................       { 
-....................          portc = POSITIONS[((iCurrentPosition + i)&3)]; 
+....................          portc = POSITIONS[((iCurrentState[motor] + i)&3)]; 
 ....................       } 
 ....................       else 
 ....................       { 
-....................          portd = POSITIONS[((iCurrentPosition + i)&3)]; 
+....................          portd = POSITIONS[((iCurrentState[motor] + i)&3)]; 
 ....................       } 
 ....................         delay_us(timeDelay_us); 
 ....................     } 
 .................... } 
 ....................  
 ....................  
-.................... void stepperRotate180left(int timeDelay_us, int motor) 
+.................... void stepperRotate180left(int timeDelay_us, int1 motor) 
 .................... { 
 ....................    for(unsigned int8 i = 1; i<=100; i++) 
 ....................    { 
-....................       if(iCurrentPosition == 0) 
+....................       if(iCurrentState[motor] == 0) 
 ....................       { 
-....................          iCurrentPosition = 3; 
+....................          iCurrentState[motor] = 3; 
 ....................       } 
 ....................       else 
 ....................       { 
-....................          iCurrentPosition = ((iCurrentPosition-1)&3); 
+....................          iCurrentState[motor] = ((iCurrentState[motor]-1)&3); 
 ....................       } 
 ....................       if(motor == 1) 
 ....................       { 
-....................          portc = POSITIONS[iCurrentPosition]; 
+....................          portc = POSITIONS[iCurrentState[motor]]; 
 ....................       }         
 ....................       else 
 ....................       { 
@@ -390,73 +556,68 @@ CCS PCM C Compiler, Version 5.026, 18875               03-dec-17 12:42
 ....................  
 .................... void main() 
 *
-003C:  MOVF   03,W
-003D:  ANDLW  1F
-003E:  MOVWF  03
-003F:  MOVLW  71
-0040:  BSF    03.5
-0041:  MOVWF  0F
-0042:  CLRF   10
-0043:  MOVF   0F,W
-0044:  BCF    06.3
-0045:  BCF    03.5
-0046:  BSF    06.3
-0047:  CLRF   20
-0048:  CLRF   24
-0049:  CLRF   23
-004A:  MOVLW  13
-004B:  MOVWF  22
-004C:  MOVLW  88
-004D:  MOVWF  21
-004E:  MOVLW  FF
-004F:  MOVWF  25
-0050:  BSF    03.5
-0051:  BSF    03.6
-0052:  MOVF   09,W
-0053:  ANDLW  C0
-0054:  MOVWF  09
-0055:  BCF    03.6
-0056:  BCF    1F.4
-0057:  BCF    1F.5
-0058:  MOVLW  00
-0059:  BSF    03.6
-005A:  MOVWF  08
-005B:  BCF    03.5
-005C:  CLRF   07
-005D:  CLRF   08
-005E:  CLRF   09
-005F:  BCF    03.7
+00B0:  MOVF   03,W
+00B1:  ANDLW  1F
+00B2:  MOVWF  03
+00B3:  MOVLW  71
+00B4:  BSF    03.5
+00B5:  MOVWF  0F
+00B6:  CLRF   10
+00B7:  MOVF   0F,W
+00B8:  BCF    06.3
+00B9:  BCF    03.5
+00BA:  BSF    06.3
+00BB:  CLRF   25
+00BC:  CLRF   24
+00BD:  MOVLW  13
+00BE:  MOVWF  23
+00BF:  MOVLW  88
+00C0:  MOVWF  22
+00C1:  BCF    28.0
+00C2:  BCF    28.1
+00C3:  MOVLW  FF
+00C4:  MOVWF  29
+00C5:  BSF    03.5
+00C6:  BSF    03.6
+00C7:  MOVF   09,W
+00C8:  ANDLW  C0
+00C9:  MOVWF  09
+00CA:  BCF    03.6
+00CB:  BCF    1F.4
+00CC:  BCF    1F.5
+00CD:  MOVLW  00
+00CE:  BSF    03.6
+00CF:  MOVWF  08
+00D0:  BCF    03.5
+00D1:  CLRF   07
+00D2:  CLRF   08
+00D3:  CLRF   09
+00D4:  BCF    03.7
 .................... { 
 ....................    setup_oscillator(OSC_8MHZ,2); 
-0060:  MOVLW  71
-0061:  BSF    03.5
-0062:  BCF    03.6
-0063:  MOVWF  0F
-0064:  MOVLW  02
-0065:  MOVWF  10
-0066:  MOVF   0F,W
+*
+00DA:  MOVLW  71
+00DB:  BSF    03.5
+00DC:  MOVWF  0F
+00DD:  MOVLW  02
+00DE:  MOVWF  10
+00DF:  MOVF   0F,W
 ....................    initStepper(); 
-0067:  BCF    03.5
-0068:  GOTO   00C
+00E0:  BCF    03.5
+00E1:  GOTO   00C
 ....................    while(TRUE) 
 ....................    { 
-....................       stepperRotateSingleRight(1); 
-0069:  MOVLW  01
-006A:  MOVWF  26
-006B:  GOTO   014
-....................       delay_ms(500); 
-006C:  MOVLW  02
-006D:  MOVWF  26
-006E:  MOVLW  FA
-006F:  MOVWF  27
-0070:  GOTO   026
-0071:  DECFSZ 26,F
-0072:  GOTO   06E
-0073:  GOTO   069
+....................       stepperMotorSequence(); 
+00E2:  GOTO   04B
+....................       delay_ms(50); 
+00E3:  MOVLW  32
+00E4:  MOVWF  2A
+00E5:  GOTO   09A
+00E6:  GOTO   0E2
 ....................        
 ....................    } 
 .................... } 
-0074:  GOTO   074
+00E7:  GOTO   0E7
 
 Configuration Fuses:
    Word  1: 0CF5   INTRC NOWDT NOPUT MCLR NOPROTECT NOCPD NOBROWNOUT IESO FCMEN NOLVP DEBUG

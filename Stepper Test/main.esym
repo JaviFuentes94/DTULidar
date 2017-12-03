@@ -1,8 +1,7 @@
-D G "stepperControl" 4 2 ""
 D G "__PCM__" 0 178 ""5.026""
 D G "__DEVICE__" 0 178 "887"
 D G "__DATE__" 0 178 ""03-dec-17""
-D G "__TIME__" 0 178 ""12:42:54"" "Standard Header file for the PIC16F887 device ////////////////"
+D G "__TIME__" 0 178 ""15:20:10"" "Standard Header file for the PIC16F887 device ////////////////"
 c L "set_tris_a" 2 3 6 "FUNCTION"
 v L "value" 2 39 "int8" `54 
 f B "set_tris_a" 2 39 "void(int8 value)" `53 
@@ -853,44 +852,54 @@ d G "INT_RB7" 2 766 "0x1800B08"
 D G "stepperControl" 4 2 ""
 C L "jump_to_isr" 4 4 1 "FUNCTION"
 C L "jump_to_isr" 4 4 1 "FUNCTION"
+D G "BOTTOM_MOTOR" 4 7 "0"
+D G "TOP_MOTOR" 4 8 "1"
+D G "BOTTOM_MOTOR_LIMIT" 4 9 "45"
+D G "TOP_MOTOR_LIMIT" 4 10 "30"
 C L "jump_to_isr" 4 4 1 "FUNCTION"
-V G "POSITIONS" 4 7 "[4]" `628 
-V G "iCurrentPosition" 4 8 "int8" `631 
+V G "POSITIONS" 4 13 "[4]" `628 
+V G "iCurrentState" 4 14 "int8[2]" `631 
 C L "jump_to_isr" 4 4 1 "FUNCTION"
-V G "iDelay" 4 9 "int32" `632 
+V G "iDelay" 4 15 "int32" `632 
 C L "jump_to_isr" 4 4 1 "FUNCTION"
-f G "initStepper" 4 11 "void()" `633 
-V L "motor" 4 12 "int8" `635 
-f G "stepperRotateSingleRight" 4 12 "void(int8 motor)" `634 
-V L "motor" 4 13 "int8" `637 
-f G "stepperRotateSingleLeft" 4 13 "void(int8 motor)" `636 
-V L "measureTime_ms" 4 14 "int8" `639 
-V L "rotation" 4 14 "int8" `640 
-f G "moveMeasure" 4 14 "int16(int8 measureTime_ms,int8 rotation)" `638 
-V L "timeDelay_us" 4 15 "int8" `642 
-V L "motor" 4 15 "int8" `643 
-f G "stepperRotate180right" 4 15 "void(int8 timeDelay_us,int8 motor)" `641 
-V L "timeDelay_us" 4 16 "int8" `645 
-V L "motor" 4 16 "int8" `646 
-f G "stepperRotate180left" 4 16 "void(int8 timeDelay_us,int8 motor)" `644 
-F G "initStepper" 3 4 "void()" `633 
-V L "motor" 3 9 "int8" `649 
-F G "stepperRotateSingleRight" 3 10 "void(int8 motor)" `634 
-C L "stepperRotateSingleRight" 3 13 1 "FUNCTION"
-V L "motor" 3 25 "int8" `649 
-F G "stepperRotateSingleLeft" 3 26 "void(int8 motor)" `636 
-C L "stepperRotate180right" 3 13 9 "FUNCTION"
-V L "timeDelay_us" 3 61 "int8" `642 
-V L "motor" 3 61 "int8" `650 
-F G "stepperRotate180right" 3 62 "void(int8 timeDelay_us,int8 motor)" `641 
-V L "i" 3 63 "int8" `648 
-V L "timeDelay_us" 3 78 "int8" `645 
-V L "motor" 3 78 "int8" `651 
-F G "stepperRotate180left" 3 79 "void(int8 timeDelay_us,int8 motor)" `644 
-V L "i" 3 80 "int8" `649 
+V G "iGlobalPosition" 4 16 "sint8[2]" `633 
+V G "bSequenceOver" 4 17 "int1" `634 
+V G "bGlobalGoRight" 4 18 "int1" `635 
+f G "initStepper" 4 20 "void()" `636 
+V L "motor" 4 21 "int8" `638 
+f G "stepperRotateSingleRight" 4 21 "void(int8 motor)" `637 
+V L "motor" 4 22 "int8" `640 
+f G "stepperRotateSingleLeft" 4 22 "void(int8 motor)" `639 
+V L "measureTime_ms" 4 23 "int8" `642 
+V L "rotation" 4 23 "int8" `643 
+f G "moveMeasure" 4 23 "int16(int8 measureTime_ms,int8 rotation)" `641 
+V L "timeDelay_us" 4 24 "int8" `645 
+V L "motor" 4 24 "int8" `646 
+f G "stepperRotate180right" 4 24 "void(int8 timeDelay_us,int8 motor)" `644 
+V L "timeDelay_us" 4 25 "int8" `648 
+V L "motor" 4 25 "int8" `649 
+f G "stepperRotate180left" 4 25 "void(int8 timeDelay_us,int8 motor)" `647 
+f G "stepperMotorSequenceTop" 4 26 "void()" `650 
+f G "stepperMotorSequence" 4 27 "void()" `651 
+F G "initStepper" 3 5 "void()" `636 
+F G "stepperMotorSequenceTop" 3 11 "void()" `650 
+F G "stepperMotorSequence" 3 23 "void()" `651 
+V L "motor" 3 55 "int8" `654 
+F G "stepperRotateSingleRight" 3 56 "void(int8 motor)" `637 
+C L "stepperRotateSingleRight" 3 59 1 "FUNCTION"
+V L "motor" 3 70 "int8" `654 
+F G "stepperRotateSingleLeft" 3 71 "void(int8 motor)" `639 
+V L "timeDelay_us" 3 91 "int8" `645 
+V L "motor" 3 91 "int8" `655 
+F G "stepperRotate180right" 3 92 "void(int8 timeDelay_us,int8 motor)" `644 
+V L "i" 3 93 "int8" `653 
+V L "timeDelay_us" 3 108 "int8" `648 
+V L "motor" 3 108 "int8" `656 
+F G "stepperRotate180left" 3 109 "void(int8 timeDelay_us,int8 motor)" `647 
+V L "i" 3 110 "int8" `654 
 C L "readLongRangeSensor" 0 8 74 "FUNCTION"
-F G "readLongRangeSensor" 0 163 "void(int8 motor)" `650 
-F G "MAIN" 0 167 "void()" `651 
+F G "readLongRangeSensor" 0 163 "void(int8 motor)" `655 
+F G "MAIN" 0 167 "void()" `656 
 F B "reset_cpu" 0 0
 F B "abs" 1 0
 F B "sleep_ulpwu" 1 0

@@ -169,8 +169,8 @@ void main()
    initStepper();
    while(TRUE)
    {
-      stepperRotateSingleRight(1);
-      delay_ms(500);
+      stepperMotorSequence();
+      delay_ms(50);
       
    }
 }

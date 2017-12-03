@@ -8,13 +8,22 @@
 01B     CCP_2_LOW
 01B     CCP_2
 01C     CCP_2_HIGH
-020     iCurrentPosition
-021-024 iDelay
-025     @TRIS_C
-026     stepperRotateSingleRight.motor
-026     MAIN.@SCRATCH1
-027     @delay_ms1.P1
-027     stepperRotateSingleRight.@SCRATCH1
+020-021 iCurrentState
+022-025 iDelay
+026-027 iGlobalPosition
+028.0   bSequenceOver
+028.1   bGlobalGoRight
+029     @TRIS_C
+02A     @delay_ms1.P1
+02A     stepperRotateSingleLeft.motor
+02A     stepperRotateSingleRight.motor
+02A     stepperMotorSequence.@SCRATCH1
+02B     stepperRotateSingleRight.@SCRATCH1
+02B     stepperRotateSingleLeft.@SCRATCH1
+02C     stepperRotateSingleRight.@SCRATCH2
+02C     stepperRotateSingleLeft.@SCRATCH2
+02D     stepperRotateSingleRight.@SCRATCH3
+02D     stepperRotateSingleLeft.@SCRATCH3
 077     @SCRATCH
 078     @SCRATCH
 078     _RETURN_
@@ -22,30 +31,33 @@
 07A     @SCRATCH
 107.6   C1OUT
 108.6   C2OUT
-10D-10E @READ_PROGRAM_MEMORY8.P1
-10D-10E @WRITE_PROGRAM_MEMORY8.P2
+10D-10E @WRITE_PROGRAM_MEMORY8.P1
+10D-10E @READ_PROGRAM_MEMORY8.P2
 
 ROM Allocation:
 000004  POSITIONS.call
 000008  POSITIONS.data
 00000C  initStepper
-000014  stepperRotateSingleRight
-000026  @delay_ms1
-00003C  @cinit1
-00003C  MAIN
-00005F  @cinit2
+000017  stepperRotateSingleRight
+000040  stepperMotorSequenceTop
+00004B  stepperMotorSequence
+000060  stepperRotateSingleLeft
+00009A  @delay_ms1
+0000B0  MAIN
+0000B0  @cinit1
+0000D4  @cinit2
 
 Project Directory:
     C:\Users\User\Google Drev\DTU Elektro\5. semester\Digital Instrumentering\30021_project\DTULidar\Stepper Test\
 
 Project Files:
-    main.c                                                  [03-dec-17 12:39  CRC=6D2BDA50]
+    main.c                                                  [03-dec-17 15:20  CRC=6D2BDA50]
     main.h                                                  [28-nov-17 17:30  CRC=A618738A]
     ..\..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16F887.h [15-maj-14 12:45  CRC=9CCD99DD]
-    lib\stepperControl.c                                    [03-dec-17 12:42  CRC=7BAD8B65]
-    lib\stepperControl.h                                    [03-dec-17 12:37  CRC=141E2B94]
+    lib\stepperControl.c                                    [03-dec-17 14:52  CRC=F58CCBA3]
+    lib\stepperControl.h                                    [03-dec-17 14:52  CRC=19720429]
 
-Source signature=53FBCA44
+Source signature=D882BBAC
 
 Units:
     main (main)
