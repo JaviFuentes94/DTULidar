@@ -1,33 +1,16 @@
 
 #include <main.h>
-#include "lib/stepperControl.c"
 
-
+/*Declarations*/
+#BYTE portc = 7      // Port used to control motor
+BYTE const POSITIONS[4] = { 0b0101, 0b1001, 0b1010, 0b0110 };
+unsigned int8 iCurrentPosition = 0; /* This variable keeps track of the current position */
+unsigned int32 iDelay = 5000; // delay default 5ms
 
 ////////////////////////////////////////////////////////////////////
-/*
 
 #define CHANNEL_LONG_RANGE  4
 #define CHANNEL_SHORT_RANGE 6
-
-float rescaleLongRangeSensor(unsigned int16 adcValue)
-{
-  float rescaledValue = 0.0;
-  
-  if(adcValue >= 1000)
-  {
-      rescaledValue = 0.0;
-  }
-  else if(adcValue <= 573)
-  {
-      rescaledValue = 5.0;
-  }
-  else
-  {
-      rescaledValue = 122.0f / (( 2.5f * ((float) adcValue) ) / 1024f - 1.28f);
-  }  
-  return rescaledValue;
-}
 
 unsigned int16 readInternalAdc(unsigned int8 channel)
 {
@@ -51,43 +34,47 @@ unsigned int16 readInternalAdc(unsigned int8 channel)
 float readLongRangeSensor()
 {
   unsigned int16 iSensorRead;
-  float rescaledValue;
   iSensorRead = readInternalAdc(CHANNEL_LONG_RANGE);
-  rescaledValue = rescaleLongRangeSensor(iSensorRead);
-  printf("Original value: %Lu   Rescaled value: %f\n", iSensorRead, rescaledValue);
-  return rescaledValue;
+  printf("Original value: %Lu\n", iSensorRead);
+  /*if(iSensorRead >= 1000 || iSensorRead <= 573 )
+  {
+   iSensorRead = 0;
+   }
+   else
+   {*/
+      iSensorRead = 122f / (( 2.5f * ((float) iSensorRead) ) / 1024f - 1.28f);
+      printf("iSensorRead: %Lu \t in volt: %f \t\t", iSensorRead, (iSensorRead * 2.5f) / 1024f );
+   //}
+  
+   return iSensorRead;
 }
 
 unsigned int16 readShortRangeSensor()
 {
   unsigned int16 iSensorRead;
   iSensorRead = readInternalAdc(CHANNEL_SHORT_RANGE);
-  /* Add conversion formulas here 
+  /* Add conversion formulas here */
   return iSensorRead;
 }
 
-*/
-
-/*
 void init()
 {
 //  setup_oscillator(OSC_8MHZ,2);
  
-  // Setup the  ADC to 2.5V 
+  /* Setup the  ADC to 2.5V */
   //setup_vref(VREF_LOW | 0x0C);
    setup_vref(0xEC);
   setup_adc(ADC_CLOCK_DIV_32);
   setup_adc_ports (sAN4 | sAN6 | VSS_VREF);
    
-  //Initially start with channel 6 
+  /* Initially start with channel 6 */
   set_adc_channel(6);
 }
-*/
 
 
 ////////////////////////////////////////////////////////////////////
 
-/*
+
 void initStepper()
 {
    set_tris_c(0xF0);
@@ -98,6 +85,7 @@ void stepperRotateSingleRight()
 {
      iCurrentPosition = ((iCurrentPosition+1)&3);
      
+     /* Set outputs to move the motor */
      portc = POSITIONS[iCurrentPosition];
 }
 
@@ -156,21 +144,15 @@ void stepperRotate180left(int timeDelay_us)
     }
 }
 
-*/
 
-
-void readLongRangeSensor()
-{
-}
 
 void main()
 {
-   setup_oscillator(OSC_8MHZ,2);
-   initStepper();
-   while(TRUE)
-   {
-      stepperMotorSequence();
-      delay_ms(50);
-      
-   }
+      setup_oscillator(OSC_8MHZ,2);
+       init();
+       initStepper();
+     while(TRUE)
+      {
+         printf("%Lu \n", moveMeasure(100, 1));   // delay 100ms rotate right
+      }
 }

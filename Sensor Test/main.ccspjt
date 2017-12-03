@@ -14,18 +14,18 @@ Type=4
 1=main.c
 
 [Opened Files]
-1=main.c
-t1=134
-2=main.h
+1=..\Stepper Test\main.h
+t1=1
+2=..\Stepper Test\TerminalUtils.c
 t2=1
-3=TerminalUtils.c
+3=main.h
 t3=1
-Count=3
-4=TerminalUtils.c
+Count=4
+4=main.c
 t4=1
 
 [ProjectLog]
-Days=8
+Days=9
 D1=31-10-2017
 D1_L=33
 D1_L1=[49349]Project Closed.
@@ -36,8 +36,8 @@ D1_L5=[49999]Started Editing.
 D1_L6=[51070]Stopped Editing.
 D1_L7=[53565]Started Editing.
 D1_L8=[56068]Stopped Editing.
-TotalEdit=339
-TotalDebug=43
+TotalEdit=344
+TotalDebug=86
 D1_E=116
 D1_D=0
 D1_L9=[56068]Project Closed.
@@ -216,6 +216,28 @@ D8_L7=[40744]Started Debugging.
 D8_L8=[41889]Stopped Debugging.
 D8_L9=[43274]Started Debugging.
 D8_L10=[46300]Stopped Debugging.
+D9=03-12-2017
+D9_L=18
+D9_L1=[58812]Project Opened.
+D9_L2=[58832]Started Editing.
+D9_L3=[59259]Stopped Editing.
+D9_E=5
+D9_D=43
+D9_L4=[59530]Project Closed.
+D9_L5=[59847]Project Opened.
+D9_L6=[60330]Project Closed.
+D9_L7=[60330]Project Opened.
+D9_L8=[60373]Started Editing.
+D9_L9=[60531]Stopped Editing.
+D9_L10=[60531]Started Debugging.
+D9_L11=[61684]Project Opened.
+D9_L12=[61704]Started Editing.
+D9_L13=[61815]Stopped Editing.
+D9_L14=[61815]Started Debugging.
+D9_L15=[62626]Stopped Debugging.
+D9_L16=[62673]Started Debugging.
+D9_L17=[65001]Stopped Debugging.
+D9_L18=[65001]Project Closed.
 [main.c]
 Type=4
 

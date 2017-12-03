@@ -15,18 +15,20 @@ Type=4
 
 [Opened Files]
 1=main.c
-t1=155
+t1=23
 2=main.h
 t2=1
-3=TerminalUtils.c
+3=..\..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16F887.h
 t3=1
-Count=6
-4=..\..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16F887.h
+Count=7
+4=lib\stepperControl.h
 t4=1
-5=lib\stepperControl.h
+5=lib\steppercontrol.c
 t5=1
-6=lib\steppercontrol.c
+6=lib\sensorcontrol.c
 t6=1
+7=lib\sensorcontrol.h
+t7=1
 
 [ProjectLog]
 Days=9
@@ -40,8 +42,8 @@ D1_L5=[49999]Started Editing.
 D1_L6=[51070]Stopped Editing.
 D1_L7=[53565]Started Editing.
 D1_L8=[56068]Stopped Editing.
-TotalEdit=424
-TotalDebug=160
+TotalEdit=435
+TotalDebug=202
 D1_E=116
 D1_D=0
 D1_L9=[56068]Project Closed.
@@ -263,7 +265,7 @@ D8_L48=[62142]Started Debugging.
 D8_L49=[68557]Stopped Debugging.
 D8_L50=[76875]Project Closed.
 D9=03-12-2017
-D9_L=34
+D9_L=50
 D9_L1=[44017]Project Opened.
 D9_L2=[44606]Project Closed.
 D9_L3=[44717]Project Opened.
@@ -285,8 +287,8 @@ D9_L18=[52026]Started Editing.
 D9_L19=[52647]Stopped Editing.
 D9_L20=[52792]Started Editing.
 D9_L21=[53013]Stopped Editing.
-D9_E=26
-D9_D=0
+D9_E=37
+D9_D=42
 D9_L22=[53013]Project Closed.
 D9_L23=[53034]Project Opened.
 D9_L24=[53053]Project Closed.
@@ -300,15 +302,31 @@ D9_L31=[55008]Stopped Editing.
 D9_L32=[55052]Started Editing.
 D9_L33=[55509]Stopped Editing.
 D9_L34=[58561]Project Closed.
+D9_L35=[65001]Project Opened.
+D9_L36=[65188]Started Editing.
+D9_L37=[65828]Stopped Editing.
+D9_L38=[65828]Started Debugging.
+D9_L39=[68217]Stopped Debugging.
+D9_L40=[68374]Started Debugging.
+D9_L41=[69083]Stopped Debugging.
+D9_L42=[69083]Project Closed.
+D9_L43=[69109]Project Opened.
+D9_L44=[69664]Started Editing.
+D9_L45=[70213]Stopped Editing.
+D9_L46=[70578]Started Editing.
+D9_L47=[70898]Stopped Editing.
+D9_L48=[71088]Started Editing.
+D9_L49=[71275]Stopped Editing.
+D9_L50=[71275]Started Debugging.
 [main.c]
 Type=4
 
 [ExtraIncludes]
-Count=2
-1=main=d:\university\master\digital instrumentation\week8\lcd16216.c
-2=main=d:\university\master\digital instrumentation\week8\terminalutils.c
-3=main=c:\users\user\google drev\dtu elektro\5. semester\digital instrumentering\30021_project\dtulidar\stepper test\lib\steppercontrol.c
-4=main=c:\users\user\google drev\dtu elektro\5. semester\digital instrumentering\30021_project\dtulidar\stepper test\lib\steppercontrol.c
+Count=4
+1=main=c:\users\user\google drev\dtu elektro\5. semester\digital instrumentering\30021_project\dtulidar\complete\lib\sensorcontrol.h
+2=main=c:\users\user\google drev\dtu elektro\5. semester\digital instrumentering\30021_project\dtulidar\complete\lib\steppercontrol.h
+3=main=c:\users\user\google drev\dtu elektro\5. semester\digital instrumentering\30021_project\dtulidar\complete\lib\sensorcontrol.c
+4=main=c:\users\user\google drev\dtu elektro\5. semester\digital instrumentering\30021_project\dtulidar\complete\lib\steppercontrol.c
 
 [debugperif]
 selected=Analog to Digital Converter

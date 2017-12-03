@@ -1,7 +1,16 @@
-#include <main.h>
+#include "sensorControl.h"
 
-#define CHANNEL_LONG_RANGE  4
-#define CHANNEL_SHORT_RANGE 6
+void initSensors()
+{
+  /* Setup the  ADC to 2.5V */
+  //setup_vref(VREF_LOW | 0x0C);
+  setup_vref(0xEC);
+  setup_adc(ADC_CLOCK_DIV_32);
+  setup_adc_ports (sAN4 | sAN6 | VSS_VREF);
+   
+  /* Initially start with channel 6 */
+  set_adc_channel(6);
+}
 
 unsigned int16 readInternalAdc(unsigned int8 channel)
 {
@@ -21,7 +30,6 @@ unsigned int16 readInternalAdc(unsigned int8 channel)
   return((int16)read_adc(ADC_READ_ONLY));
 }
 
-//unsigned int16 readLongRangeSensor()
 float readLongRangeSensor()
 {
   unsigned int16 iSensorRead;
@@ -73,33 +81,4 @@ float readShortRangeSensor()
    }
    
   return fSensorRead;
-}
-
-void init()
-{
-  setup_oscillator(OSC_8MHZ,2);
- 
-  /* Setup the  ADC to 2.5V */
-  //setup_vref(VREF_LOW | 0x0C);
-   setup_vref(0xEC);
-  setup_adc(ADC_CLOCK_DIV_32);
-  setup_adc_ports (sAN4 | sAN6 | VSS_VREF);
-   
-  /* Initially start with channel 6 */
-  set_adc_channel(6);
-}
-
-
-void main()
-{
-  init();
-
-  while(1)
-  {
-   printf("Long range read: %f\t", readLongRangeSensor());
-   printf("Short range read: %f\n", readShortRangeSensor());    
-    
-//    printf("Short range read: %lu\n\n", readShortRangeSensor());
-    delay_ms(20);
-  }
 }

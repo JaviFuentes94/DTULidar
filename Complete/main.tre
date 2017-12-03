@@ -1,0 +1,41 @@
+ÀÄ5
+   ÀÄMAIN  0/87  Ram=4
+      ÃÄ@cinit1  (Inline)  Ram=0
+      ÃÄinitStepper  0/11  Ram=0
+      ÃÄinitSensors  0/32  Ram=0
+      ÃÄstepperMotorSequence  0/93  Ram=6
+      ³  ÃÄstepperMotorSequenceTop  0/11  Ram=0
+      ³  ³  ÀÄstepperRotateSingleRight  0/41  Ram=4
+      ³  ³     ÃÄ@const627  0/8  Ram=0
+      ³  ³     ÀÄ@const627  0/8  Ram=0
+      ³  ÃÄstepperRotateSingleRight  0/41  Ram=4
+      ³  ³  ÀÄ*
+      ³  ÃÄstepperMotorSequenceTop  0/11  Ram=0
+      ³  ³  ÀÄ*
+      ³  ÀÄstepperRotateSingleLeft  (Inline)  Ram=4
+      ³     ÃÄ@const627  0/8  Ram=0
+      ³     ÀÄ@const627  0/8  Ram=0
+      ÃÄ@delay_ms1  0/22  Ram=1
+      ÃÄreadRangeSensor  0/484  Ram=8
+      ³  ÃÄreadShortRangeSensor  (Inline)  Ram=14
+      ³  ³  ÃÄreadInternalAdc  0/36  Ram=1
+      ³  ³  ÃÄ@ITOF  0/29  Ram=2
+      ³  ³  ÃÄ@MULFF  0/117  Ram=13
+      ³  ³  ÃÄ@DIVFF  0/202  Ram=14
+      ³  ³  ÃÄ@ADDFF  0/321  Ram=16
+      ³  ³  ÃÄ@DIVFF  0/202  Ram=14
+      ³  ³  ÃÄ@ADDFF  0/321  Ram=16
+      ³  ³  ÀÄ@DIVFF  0/202  Ram=14
+      ³  ÃÄreadLongRangeSensor  (Inline)  Ram=14
+      ³  ³  ÃÄreadInternalAdc  0/36  Ram=1
+      ³  ³  ÃÄ@ITOF  0/29  Ram=2
+      ³  ³  ÃÄ@MULFF  0/117  Ram=13
+      ³  ³  ÃÄ@DIVFF  0/202  Ram=14
+      ³  ³  ÃÄ@ADDFF  0/321  Ram=16
+      ³  ³  ÃÄ@DIVFF  0/202  Ram=14
+      ³  ³  ÃÄ@ADDFF  0/321  Ram=16
+      ³  ³  ÀÄ@DIVFF  0/202  Ram=14
+      ³  ÃÄ@FLT  (Inline)  Ram=10
+      ³  ÃÄ@SFTOI  0/31  Ram=4
+      ³  ÀÄ@SFTOI  0/31  Ram=4
+      ÀÄsendMeasurements  0/57  Ram=7
