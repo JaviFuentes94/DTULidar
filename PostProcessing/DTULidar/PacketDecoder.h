@@ -21,6 +21,8 @@ namespace PacketDecoder
 	};
 
 	packet_t Decode(char *buffer);
+
+	packet_t Decode(std::vector<char> &buffer);
 };
 
 

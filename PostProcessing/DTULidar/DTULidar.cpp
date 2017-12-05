@@ -157,24 +157,40 @@ int main()
 
 	while (serialport.isConnected())
 	{
+		std::vector<char> buffer;
 		int bytesRead = serialport.readSerialPort(incomingData, MAX_DATA_LENGTH);
 
 		//printf_s("Bytes read %d \n", bytesRead);
 		//puts(incomingData);
-		if (bytesRead == PACKET_SIZE) {
-			PacketDecoder::packet_t packet = PacketDecoder::Decode(incomingData);
 
-			printf("zAngle: %f \n", packet.zAngle);
-			printf("xAngle: %f \n", packet.xAngle);
-			printf("Distance: %d \n", packet.distance);
-
-			pcl::PointXYZ transformedPoint = TransformPoint(packet);
-
-			UpdateVisualization(transformedPoint, viewer, ptrCloud);
-		}
-		else if (bytesRead !=0)
+		if (bytesRead > 0)
 		{
-			cout << "Packet Lost"; 
+			for (int i = 0; i < bytesRead; i++)
+			{
+				buffer.push_back(incomingData[i]);
+			}
+		}
+
+
+
+		if (buffer.size() >= PACKET_SIZE) {
+			PacketDecoder::packet_t packet = PacketDecoder::Decode(buffer);
+
+			if (packet.distance <= 500) {
+
+				printf("zAngle: %f \n", packet.zAngle);
+				printf("xAngle: %f \n", packet.xAngle);
+				printf("Distance: %d \n", packet.distance);
+
+				pcl::PointXYZ transformedPoint = TransformPoint(packet);
+
+				UpdateVisualization(transformedPoint, viewer, ptrCloud);
+			}
+			else
+			{
+				cout << "Packet Lost"; 
+			}
+
 		}
 		Sleep(10);
 	}

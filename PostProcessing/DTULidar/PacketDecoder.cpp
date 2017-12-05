@@ -33,4 +33,23 @@ namespace PacketDecoder
 		
 		return packet;
 	}
+
+	packet_t Decode(std::vector<char> &buffer) {
+
+		packet_t packet;
+
+		float angleConv = 360.0 / 200.0;
+
+		int8_t zAngleRaw = buffer[0];
+		packet.zAngle = (float)zAngleRaw * angleConv;
+
+		int8_t xAngleRaw = buffer[1];
+		packet.xAngle = (float)xAngleRaw * angleConv;
+
+		packet.distance = *((uint16_t*)(&(buffer[2])));
+
+		buffer.erase(buffer.begin(),buffer.begin()+PACKET_SIZE);
+
+		return packet;
+	}
 }
