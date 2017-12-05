@@ -35,13 +35,13 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DTULidar.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="SerialPort.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="PacketDecoder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DTULidar.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -4,22 +4,33 @@
 namespace PacketDecoder
 {
 
-	int packetSize = 6; //bytes
-
 	packet_t Decode(char *buffer) {
 
-		std::vector<uint16_t> packetVector;
-		for (int i = 0; i <= packetSize; i = i + 2)
+		//std::vector<uint16_t> packetVector;
+		packet_t packet;
+
+		float angleConv = 360.0/200.0;
+
+		int8_t zAngleRaw = buffer[0];
+		packet.zAngle = (float)zAngleRaw * angleConv;
+		
+		int8_t xAngleRaw = buffer[1];
+		packet.xAngle = (float)xAngleRaw * angleConv;
+
+		//uint16_t packetElement = ((((uint32_t)buffer[i + 1] & 0xFF) << 24) | (((uint32_t)buffer[i + 2] & 0xFF) << 16) | (((uint32_t)buffer[i + 1] & 0xFF) << 8) | ((uint32_t)buffer[i] & 0xFF);
+		packet.distance = *((uint16_t*)(&(buffer[2])));
+		
+		/*char *a = new char[PACKET_SIZE-2];
+
+		for (int i = 2; i < PACKET_SIZE; i++)
 		{
-			uint16_t packetElement = ((uint16_t)buffer[i + 1]<<8) | ((uint16_t)buffer[i] & 0x00FF);
-			packetVector.push_back(packetElement);
+			a[i - 2] = buffer[i];
 		}
 
-		packet_t packet;
-		packet.zAngle = packetVector.at(0);
-		packet.yAngle = packetVector.at(1);
-		packet.distance = packetVector.at(2);
+		packet.distance = *((float*)(&(buffer[2])));
 
+		packet.distance = std::atof(a);*/
+		
 		return packet;
 	}
 }

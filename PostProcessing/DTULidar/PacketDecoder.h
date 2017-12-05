@@ -2,6 +2,7 @@
 
 #ifndef PACKETDECODER_H
 #define PACKETDECODER_H
+#define PACKET_SIZE 4
 
 #include <windows.h>
 #include <iostream>
@@ -14,8 +15,8 @@
 namespace PacketDecoder 
 {
 	struct packet_t {
-		uint16_t zAngle;
-		uint16_t yAngle;
+		float  zAngle;
+		float  xAngle;
 		uint16_t distance;
 	};
 
