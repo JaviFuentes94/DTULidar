@@ -1,9 +1,9 @@
 
-ROM used:   1586/7936 (20%)
-            1586/7936 (20%) including unused fragments
+ROM used:   1603/7936 (20%)
+            1603/7936 (20%) including unused fragments
 
             1.5 Average locations per line
-            15.3 Average locations per statement
+            15.1 Average locations per statement
 
 RAM used:   20/357 (6%) at main() level
             59/357 (17%) worst case
@@ -16,53 +16,53 @@ Lines Stmts  %   Files
    47    17  16  main.c
    16     0   0  main.h
   769     0   0  ..\..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16F887.h
-   93    44  42  lib\stepperControl.c
+   94    45  42  lib\stepperControl.c
    32     0   0  lib\stepperControl.h
-  108    43  41  lib\sensorControl.c
+  112    44  42  lib\sensorControl.c
    16     0   0  lib\sensorControl.h
 ----- -----
- 1081   104 Total
+ 1086   106 Total
 
 Page ROM  %  RAM    Vol Diff  Functions:
 ---- --- --- ---    --- ----  ----------
-0     22   1    1             @delay_ms1
-0      8   1    0             @const627
+0     20   1    1             @delay_ms1
+0      8   0    0             @const627
 0     11   1    0     32  1.0  initStepper
-0     11   1    0    125  3.8  stepperMotorSequenceTop
-0     93   6    6    481  7.0  stepperMotorSequence
-0     41   3    4    206  4.5  stepperRotateSingleRight
- Inline         4    307  4.1  stepperRotateSingleLeft
+0     17   1    1    147  3.9  stepperMotorSequenceBottom
+0     81   5    6    481  7.0  stepperMotorSequence
+ Inline         4    206  4.5  stepperRotateSingleRight
+0     55   3    4    307  4.1  stepperRotateSingleLeft
 0     32   2    0     88  1.7  initSensors
-0    484  31    8    147  4.0  readRangeSensor
- Inline        10    119  3.6  @FLT
-0     31   2    4    195  3.1  @SFTOI
+0    495  31    8    176  4.3  readRangeSensor
+0     31   2    4             @SFTOI
+ Inline        10             @FLT
 0     36   2    1    195  3.1  readInternalAdc
  Inline        14    487  7.8  readLongRangeSensor
 0     29   2    2             @ITOF
 0    117   7   13             @MULFF
 0    202  13   14             @DIVFF
-0    321  20   16    456  7.8  @ADDFF
+0    321  20   16             @ADDFF
  Inline        14    475  7.8  readShortRangeSensor
 0     57   4    7    450  5.1  sendMeasurements
 0     87   5    4    267  3.2  MAIN
- Inline         0    257  3.1  @cinit1
+ Inline         0             @cinit1
 
 Program metrics:
-    Functions               16
-    Statements              104
-    Comments                159
-    Volume (V)              7489
-    Difficulty (D)          70.3
-    Effort to implement (E) 526729
-    Time to implement (T)   8 hours, 8 minutes
-    Est Delivered Bugs (B)  2
-    Cyclomatic Complexity   19
-    Maintainability (MI)    59
+    Functions               12
+    Statements              106
+    Comments                162
+    Volume (V)              5523
+    Difficulty (D)          52.3
+    Effort to implement (E) 288585
+    Time to implement (T)   4 hours, 27 minutes
+    Est Delivered Bugs (B)  1
+    Cyclomatic Complexity   15
+    Maintainability (MI)    76
 
  Segment     Used  Free
 -----------  ----  ----
 00000-00003     4  0  
-00004-007FF  1582  462  
+00004-007FF  1599  445  
 00800-00FFF     0  2048  
 01000-017FF     0  2048  
 01800-01EFF     0  1792  

@@ -1,8 +1,8 @@
-C L "MAIN" 0 16 1 "FUNCTION"
-D G "__PCM__" 0 50 ""5.026""
-D G "__DEVICE__" 0 50 "887"
-D G "__DATE__" 0 50 ""03-dec-17""
-D G "__TIME__" 0 50 ""20:09:13"" "Standard Header file for the PIC16F887 device ////////////////"
+D G "CHANNEL_SHORT_RANGE" 6 6 "6"
+D G "__PCM__" 0 48 ""5.026""
+D G "__DEVICE__" 0 48 "887"
+D G "__DATE__" 0 48 ""05-dec-17""
+D G "__TIME__" 0 48 ""16:39:20"" "Standard Header file for the PIC16F887 device ////////////////"
 c L "set_tris_a" 2 3 6 "FUNCTION"
 v L "value" 2 39 "int8" `54 
 f B "set_tris_a" 2 39 "void(int8 value)" `53 
@@ -853,7 +853,7 @@ d G "INT_RB7" 2 766 "0x1800B08"
 D G "stepperControl" 4 2 ""
 D G "BOTTOM_MOTOR" 4 5 "0"
 D G "TOP_MOTOR" 4 6 "1"
-D G "BOTTOM_MOTOR_LIMIT" 4 7 "20"
+D G "BOTTOM_MOTOR_LIMIT" 4 7 "100"
 D G "TOP_MOTOR_LIMIT" 4 8 "30"
 C L "jump_to_isr" 4 4 1 "FUNCTION"
 C L "jump_to_isr" 4 4 2 "FUNCTION"
@@ -864,7 +864,7 @@ V G "iDelay" 4 15 "int32" `631
 C L "jump_to_isr" 4 4 1 "FUNCTION"
 V G "iGlobalPosition" 4 16 "sint8[2]" `632 
 V G "bSequenceOver" 4 17 "int1" `633 
-V G "bGlobalGoRight" 4 18 "int1" `634 
+V G "bGlobalGoUp" 4 18 "int1" `634 
 C L "jump_to_isr" 4 4 1 "FUNCTION"
 f G "initStepper" 4 21 "void()" `635 
 V L "motor" 4 22 "int8" `637 
@@ -880,20 +880,20 @@ f G "stepperRotate180right" 4 25 "void(int8 timeDelay_us,int8 motor)" `643
 V L "timeDelay_us" 4 26 "int8" `647 
 V L "motor" 4 26 "int8" `648 
 f G "stepperRotate180left" 4 26 "void(int8 timeDelay_us,int8 motor)" `646 
-f G "stepperMotorSequenceTop" 4 27 "void()" `649 
+f G "stepperMotorSequenceBottom" 4 27 "void()" `649 
 V L "angleX" 4 28 "*sint8" `651 
 V L "angleZ" 4 28 "*sint8" `652 
 f G "stepperMotorSequence" 4 28 "void(*sint8 angleX,*sint8 angleZ)" `650 
 F G "initStepper" 3 5 "void()" `635 
-F G "stepperMotorSequenceTop" 3 11 "void()" `649 
-V L "angleX" 3 22 "*sint8" `651 
-V L "angleZ" 3 22 "*sint8" `656 
-F G "stepperMotorSequence" 3 23 "void(*sint8 angleX,*sint8 angleZ)" `650 
-V L "motor" 3 58 "int8" `655 
-F G "stepperRotateSingleRight" 3 59 "void(int8 motor)" `636 
-C L "stepperRotateSingleRight" 3 62 1 "FUNCTION"
-V L "motor" 3 73 "int8" `655 
-F G "stepperRotateSingleLeft" 3 74 "void(int8 motor)" `638 
+F G "stepperMotorSequenceBottom" 3 11 "void()" `649 
+V L "angleX" 3 23 "*sint8" `651 
+V L "angleZ" 3 23 "*sint8" `656 
+F G "stepperMotorSequence" 3 24 "void(*sint8 angleX,*sint8 angleZ)" `650 
+V L "motor" 3 59 "int8" `655 
+F G "stepperRotateSingleRight" 3 60 "void(int8 motor)" `636 
+C L "stepperRotateSingleRight" 3 63 1 "FUNCTION"
+V L "motor" 3 74 "int8" `655 
+F G "stepperRotateSingleLeft" 3 75 "void(int8 motor)" `638 
 D G "sensorControl" 6 2 ""
 D G "CHANNEL_LONG_RANGE" 6 5 "4"
 D G "CHANNEL_SHORT_RANGE" 6 6 "6"
@@ -910,30 +910,32 @@ C L "initSensors" 5 6 1 "FUNCTION"
 F G "readRangeSensor" 5 16 "int16()" `659 
 V L "fShortMeasRange" 5 17 "float" `660 
 V L "fLongMeasRange" 5 18 "float" `661 
-V L "channel" 5 30 "int8" `668 
-F G "readInternalAdc" 5 31 "int16(int8 channel)" `655 
+C L "readRangeSensor" 5 6 1 "FUNCTION"
+C L "readRangeSensor" 5 6 1 "FUNCTION"
+V L "channel" 5 34 "int8" `668 
+F G "readInternalAdc" 5 35 "int16(int8 channel)" `655 
 C L "readInternalAdc" 5 6 1 "FUNCTION"
-V L "done" 5 37 "int1" `667 
+V L "done" 5 41 "int1" `667 
 C L "readInternalAdc" 5 6 1 "FUNCTION"
 C L "readInternalAdc" 5 6 1 "FUNCTION"
 C L "readInternalAdc" 5 6 1 "FUNCTION"
-F G "readLongRangeSensor" 5 49 "float()" `657 
-V L "iSensorRead" 5 50 "int16" `668 
-V L "fSensorRead" 5 51 "float" `669 
-V L "fCumulativeMeasurement" 5 52 "float" `670 
-V L "i" 5 54 "int8" `671 
+F G "readLongRangeSensor" 5 53 "float()" `657 
+V L "iSensorRead" 5 54 "int16" `668 
+V L "fSensorRead" 5 55 "float" `669 
+V L "fCumulativeMeasurement" 5 56 "float" `670 
+V L "i" 5 58 "int8" `671 
 C L "readLongRangeSensor" 5 6 1 "FUNCTION"
-F G "readShortRangeSensor" 5 82 "float()" `658 
-V L "iSensorRead" 5 83 "int16" `683 
-V L "fSensorRead" 5 84 "float" `684 
-V L "fCumulativeMeasurement" 5 85 "float" `685 
-V L "i" 5 87 "int8" `686 
+F G "readShortRangeSensor" 5 86 "float()" `658 
+V L "iSensorRead" 5 87 "int16" `683 
+V L "fSensorRead" 5 88 "float" `684 
+V L "fCumulativeMeasurement" 5 89 "float" `685 
+V L "i" 5 91 "int8" `686 
 C L "readShortRangeSensor" 5 6 1 "FUNCTION"
 C L "readShortRangeSensor" 5 6 1 "FUNCTION"
 V L "zAngle" 0 6 "sint8" `688 
-V L "yAngle" 0 6 "sint8" `689 
+V L "xAngle" 0 6 "sint8" `689 
 V L "distance" 0 6 "int16" `690 
-F G "sendMeasurements" 0 7 "void(sint8 zAngle,sint8 yAngle,int16 distance)" `687 
+F G "sendMeasurements" 0 7 "void(sint8 zAngle,sint8 xAngle,int16 distance)" `687 
 V L "characterToSend" 0 8 "int8" `691 
 F G "MAIN" 0 23 "void()" `692  "Declarations *"
 V L "iRangeMeasurement" 0 25 "int16" `693 
@@ -941,7 +943,7 @@ V L "iAngleZ" 0 26 "sint8" `694
 V L "iAngleX" 0 26 "sint8" `695  "Initialize hardware *"
 C L "MAIN" 0 35 1 "FUNCTION"
 C L "MAIN" 0 35 1 "FUNCTION"
-C L "MAIN" 0 35 1 "FUNCTION"
+C L "MAIN" 0 35 2 "FUNCTION"
 C L "MAIN" 0 35 1 "FUNCTION"
 F B "reset_cpu" 0 0
 F B "abs" 1 0

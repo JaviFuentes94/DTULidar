@@ -13,23 +13,24 @@
 023-026 iDelay
 027-028 iGlobalPosition
 029.0   bSequenceOver
-029.1   bGlobalGoRight
+029.1   bGlobalGoUp
 02A     @TRIS_C
 02B-02C MAIN.iRangeMeasurement
 02D     MAIN.iAngleZ
 02E     MAIN.iAngleX
-02F     @delay_ms1.P1
+02F     sendMeasurements.zAngle
 02F-030 stepperMotorSequence.angleX
 02F-032 readRangeSensor.fShortMeasRange
-02F     sendMeasurements.zAngle
-030     sendMeasurements.yAngle
-031-032 stepperMotorSequence.angleZ
+030     sendMeasurements.xAngle
 031-032 sendMeasurements.distance
+031-032 stepperMotorSequence.angleZ
 033     stepperRotateSingleRight.motor
-033     sendMeasurements.characterToSend
 033     stepperRotateSingleLeft.motor
+033     sendMeasurements.characterToSend
 033-036 readRangeSensor.fLongMeasRange
+033     stepperMotorSequenceBottom.@SCRATCH1
 033     stepperMotorSequence.@SCRATCH1
+034     @delay_ms1.P1
 034     stepperMotorSequence.@SCRATCH2
 034     stepperRotateSingleRight.@SCRATCH1
 034     stepperRotateSingleLeft.@SCRATCH1
@@ -40,18 +41,18 @@
 036     stepperRotateSingleRight.@SCRATCH3
 036     stepperRotateSingleLeft.@SCRATCH3
 037-038 readShortRangeSensor.iSensorRead
-037-03A @SFTOI.P1
 037-038 readLongRangeSensor.iSensorRead
-037-03A @FLT.P1
-039-03C readShortRangeSensor.fSensorRead
+037-03A @SFTOI.P1
+037-03A @FLT.P2
 039-03C readLongRangeSensor.fSensorRead
+039-03C readShortRangeSensor.fSensorRead
 03B-03E @FLT.P1
 03D-040 readLongRangeSensor.fCumulativeMeasurement
 03D-040 readShortRangeSensor.fCumulativeMeasurement
 03F     @FLT.@SCRATCH1
 040     @FLT.@SCRATCH2
-041     readShortRangeSensor.i
 041     readLongRangeSensor.i
+041     readShortRangeSensor.i
 042     readInternalAdc.channel
 042-043 @ITOF.P1
 042-045 @MULFF.P2
@@ -67,8 +68,8 @@
 046-049 @ADDFF.P1
 046-049 @DIVFF.P2
 046-049 @MULFF.P3
-04A-04D @ADDFF.P1
-04A-04D @DIVFF.P2
+04A-04D @DIVFF.P1
+04A-04D @ADDFF.P2
 04A     @MULFF.@SCRATCH1
 04B     @MULFF.@SCRATCH2
 04C     @MULFF.@SCRATCH3
@@ -103,39 +104,39 @@ ROM Allocation:
 000008  POSITIONS.data
 00000C  initStepper
 000017  initSensors
-000037  stepperRotateSingleRight
-000060  stepperMotorSequenceTop
-00006B  stepperMotorSequence
-000080  stepperRotateSingleLeft
-0000C8  @delay_ms1
-0000DE  readInternalAdc
-000102  @ITOF
-00011F  @MULFF
-000194  @DIVFF
-00025E  @ADDFF
-00039F  @SFTOI
-0003BE  readShortRangeSensor
-0003BE  readRangeSensor
-00047C  readLongRangeSensor
-000549  @FLT
-0005A2  sendMeasurements
-0005DB  @cinit1
-0005DB  MAIN
-000609  @cinit2
+000037  stepperRotateSingleLeft
+00006E  @delay_ms1
+000082  stepperMotorSequenceBottom
+000093  stepperMotorSequence
+00009F  stepperRotateSingleRight
+0000E4  readInternalAdc
+000108  @ITOF
+000125  @MULFF
+00019A  @DIVFF
+000264  @ADDFF
+0003A5  @SFTOI
+0003C4  readRangeSensor
+0003C4  readShortRangeSensor
+000482  readLongRangeSensor
+00055A  @FLT
+0005B3  sendMeasurements
+0005EC  @cinit1
+0005EC  MAIN
+00061A  @cinit2
 
 Project Directory:
     C:\Users\User\Google Drev\DTU Elektro\5. semester\Digital Instrumentering\30021_project\DTULidar\Complete\
 
 Project Files:
-    main.c                                                  [03-dec-17 20:07  CRC=FDAE01BE]
+    main.c                                                  [05-dec-17 14:58  CRC=A3A1A47B]
     main.h                                                  [03-dec-17 19:51  CRC=F817D64F]
     ..\..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16F887.h [15-maj-14 12:45  CRC=9CCD99DD]
-    lib\stepperControl.c                                    [03-dec-17 18:15  CRC=F324F3F4]
-    lib\stepperControl.h                                    [03-dec-17 18:15  CRC=470DE6FB]
-    lib\sensorControl.c                                     [03-dec-17 20:09  CRC=BF17AF16]
+    lib\stepperControl.c                                    [05-dec-17 14:07  CRC=598E0312]
+    lib\stepperControl.h                                    [05-dec-17 16:38  CRC=05B3B263]
+    lib\sensorControl.c                                     [05-dec-17 14:47  CRC=2208A8D0]
     lib\sensorControl.h                                     [03-dec-17 20:03  CRC=34F1C27D]
 
-Source signature=F5C180E9
+Source signature=23B4F7E6
 
 Units:
     main (main)

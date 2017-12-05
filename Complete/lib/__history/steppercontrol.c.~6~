@@ -9,10 +9,10 @@ void initStepper()
 
 void stepperMotorSequenceBottom()
 {
+   delay_ms(1000);
    stepperRotateSingleLeft(BOTTOM_MOTOR);
    iGlobalPosition[BOTTOM_MOTOR]++;
    bGlobalGoUp = !bGlobalGoUp;
-   delay_ms(1000);
 
    if(iGlobalPosition[BOTTOM_MOTOR] == BOTTOM_MOTOR_LIMIT)
    {

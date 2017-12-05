@@ -7,14 +7,13 @@ void initStepper()
    set_tris_d(0xF0);
 }
 
-void stepperMotorSequenceBottom()
+void stepperMotorSequenceTop()
 {
-   stepperRotateSingleLeft(BOTTOM_MOTOR);
-   iGlobalPosition[BOTTOM_MOTOR]++;
-   bGlobalGoUp = !bGlobalGoUp;
-   delay_ms(1000);
+   stepperRotateSingleRight(TOP_MOTOR);
+   iGlobalPosition[TOP_MOTOR]++;
+   bGlobalGoRight = !bGlobalGoRight;
 
-   if(iGlobalPosition[BOTTOM_MOTOR] == BOTTOM_MOTOR_LIMIT)
+   if(iGlobalPosition[TOP_MOTOR] == TOP_MOTOR_LIMIT)
    {
       bSequenceOver = True;
    }
@@ -27,28 +26,28 @@ void stepperMotorSequence(signed int8 * angleX, signed int8 * angleZ)
       return;
    }
 
-   if(bGlobalGoUp == TRUE)
+   if(bGlobalGoRight == TRUE)
    {
-      if(iGlobalPosition[TOP_MOTOR] == TOP_MOTOR_LIMIT)
+      if(iGlobalPosition[BOTTOM_MOTOR] == BOTTOM_MOTOR_LIMIT)
       {
-         stepperMotorSequenceBottom();
+         stepperMotorSequenceTop();
       }
       else
       {
-         stepperRotateSingleRight(TOP_MOTOR);      
-         iGlobalPosition[TOP_MOTOR]++;         
+         stepperRotateSingleRight(BOTTOM_MOTOR);      
+         iGlobalPosition[BOTTOM_MOTOR]++;         
       }
    }
    else
    {
-      if(iGlobalPosition[TOP_MOTOR] == (-1*TOP_MOTOR_LIMIT))
+      if(iGlobalPosition[BOTTOM_MOTOR] == (-1*BOTTOM_MOTOR_LIMIT))
       {
-         stepperMotorSequenceBottom();
+         stepperMotorSequenceTop();
       }
       else
       {
-         stepperRotateSingleLeft(TOP_MOTOR);      
-         iGlobalPosition[TOP_MOTOR]--;               
+         stepperRotateSingleLeft(BOTTOM_MOTOR);      
+         iGlobalPosition[BOTTOM_MOTOR]--;               
       }
    }
    
