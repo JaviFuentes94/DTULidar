@@ -3,13 +3,13 @@
 #include "lib/sensorControl.c"
 
 
-void sendMeasurements(signed int8 zAngle, signed int8 yAngle, unsigned int16 distance)
+void sendMeasurements(signed int8 zAngle, signed int8 xAngle, unsigned int16 distance)
 {
    char characterToSend;
    characterToSend = *((char*)&(zAngle));
    putc((int)characterToSend);
    
-   characterToSend = *((char*)&(yAngle));
+   characterToSend = *((char*)&(xAngle));
    putc((int)characterToSend);
    
    characterToSend = *((char*)&(distance));
@@ -35,11 +35,11 @@ void main()
          /* Move the motor and recieve motors positions */
          stepperMotorSequence(&iAngleX, &iAngleZ);
          /* Wait for the motor to settle */
-         delay_ms(50);
+         delay_ms(25); // 50 works ok
          /* Read the sensor value */
          iRangeMeasurement = readRangeSensor();
          /* Send the measurements to the PC */
-         sendMeasurements(iAngleX, iAngleZ, iRangeMeasurement);
+         sendMeasurements(iAngleZ, iAngleX, iRangeMeasurement);
          //printf("%f\n", fRangeMeasurement);
      }
    

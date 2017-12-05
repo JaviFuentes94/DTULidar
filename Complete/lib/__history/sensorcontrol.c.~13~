@@ -17,10 +17,6 @@ int16 readRangeSensor()
    float fShortMeasRange = readShortRangeSensor();
    float fLongMeasRange = readLongRangeSensor();
    
-   //DEBUG
-   return ((int16)fShortMeasRange);
-   //DEBUG
-   
    if(fShortMeasRange == 150)
    {
       return ((int16)fLongMeasRange);

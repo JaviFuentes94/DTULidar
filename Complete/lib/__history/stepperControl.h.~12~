@@ -5,7 +5,7 @@
 #define BOTTOM_MOTOR 0 
 #define TOP_MOTOR 1
 #define BOTTOM_MOTOR_LIMIT 100
-#define TOP_MOTOR_LIMIT 30
+#define TOP_MOTOR_LIMIT 60
 #BYTE portc = 7      // Port used to control motor
 #BYTE portd = 8      // PIC16F887 datasheet page 25
 
