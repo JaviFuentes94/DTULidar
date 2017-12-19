@@ -53,3 +53,10 @@ dkms.conf
 
 
 */__history/*
+Application/Debug/
+Application/Release/
+Application/x64/
+Application/.vs/
+*.sln
+*.vcxproj
+*.vcxproj.filters
