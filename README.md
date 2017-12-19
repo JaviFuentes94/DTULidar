@@ -4,8 +4,7 @@ The objective of this project is to build a rudimentary lidar that is able to sc
 
 
 The general overview with the device working
-![alt-text]
-(https://github.com/JaviFuentes94/DTULidar/blob/master/Media/overview.gif)
+![alt-text](https://github.com/JaviFuentes94/DTULidar/blob/master/Media/overview.gif)
 
 The final prototype
 ![alt-text](https://github.com/JaviFuentes94/DTULidar/blob/master/Media/Lidar1.jpg)
