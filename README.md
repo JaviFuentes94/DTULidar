@@ -29,11 +29,11 @@ In order to run the application you need:
 
 * **Christoph Weiser** [chrische-xx](https://github.com/chrische-xx)
 
-* **Javier Fuentes** [JaviFuentes94](https://github.com/JaviFuentes94)
+* **Javier Fuentes Alonso** [JaviFuentes94](https://github.com/JaviFuentes94)
 
 * **Szymon Kowalewski** [szymonkowalewski](https://github.com/szymonkowalewski)
 
-* **Mads Duncan** [MadsDuncan](https://github.com/MadsDuncan)
+* **Mads Duncan Cronquist Larsen** [MadsDuncan](https://github.com/MadsDuncan)
 
 
 ## Acknowledgments
